@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Medicine;
+use App\Models\Artikel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MedicineSeeder extends Seeder
+class ArtikelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Medicine::create([
+        Artikel::create([
             'disease_id' => 2,
             'name' => 'Insulin Basal',
             'img' => 'https://source.unsplash.com/w8p9cQDLX7I',
@@ -21,7 +21,7 @@ class MedicineSeeder extends Seeder
             'composition' => 'Insulin Degludec dan Insulin Glargine U-300.',
             'dose' => 'diberikan satu kali injeksi pada saat setelah makan dalam sehari.'
         ]);
-        Medicine::create([
+        Artikel::create([
             'disease_id' => 2,
             'name' => 'Insulin Pradinal',
             'img' => 'https://source.unsplash.com/w8p9cQDLX7I',
@@ -29,7 +29,7 @@ class MedicineSeeder extends Seeder
             'composition' => 'Insulin Lispro, Insulin Aspart, dan Insulin Glulisine.',
             'dose' => 'diberikan satu kali injeksi dalam sehari.'
         ]);
-        Medicine::create([
+        Artikel::create([
             'disease_id' => 2,
             'name' => 'Insulin Premix',
             'img' => 'https://source.unsplash.com/w8p9cQDLX7I',

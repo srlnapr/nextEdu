@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            SymptomSeeder::class,
-            DiseaseSeeder::class,
-            SolutionSeeder::class,
-            MedicineSeeder::class,
+            PertanyaanSeeder::class,
+            NamaJurusanSeeder::class,
+            SaranPekerjaanSeeder::class,
+            ArtikelSeeder::class,
             RuleSeeder::class,
-            DiagnoseResultSeeder::class,
+            HasilTesSeeder::class,
         ]);
     }
 }

@@ -4,16 +4,16 @@
     <div class="col-1 col-span-1 flex items-center justify-center text-2xl font-bold text-primary">{{ count($user) }}
     </div>
     <div class="col-2 col-span-2">
-      <p class="text-xs lg:text-base">DiaCare</p>
-      <p class="text-xs lg:text-base">Users</p>
+      <p class="text-xs lg:text-base">Pengguna</p>
+      <p class="text-xs lg:text-base">Nextedu</p>
     </div>
   </div>
   <div class="grid grid-cols-3">
     <div class="col-1 col-span-1 flex items-center justify-center text-2xl font-bold text-primary">{{ count($diagnoseResults) }}
     </div>
     <div class="col-2 col-span-2">
-      <p class="text-xs lg:text-base">Times Users</p>
-      <p class="text-xs lg:text-base">Already Diagnosed</p>
+      <p class="text-xs lg:text-base">Hasil</p>
+      <p class="text-xs lg:text-base">Deteksi</p>
     </div>
   </div>
 </div>
