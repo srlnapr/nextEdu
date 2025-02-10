@@ -8,7 +8,7 @@
   @vite('resources/css/app.css')
 
   <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-  <title>DiaCare</title>
+  <title>nextEdu</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">

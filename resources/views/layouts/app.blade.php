@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   @vite('resources/css/app.css')
 
-  <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-  <title>DiaCare</title>
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('android-chrome-512x512.png') }}">
+  <title>nextEdu</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
