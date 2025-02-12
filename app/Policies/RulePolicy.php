@@ -13,7 +13,7 @@ class RulePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true; // Ubah sesuai kebijakan akses
     }
 
     /**
@@ -21,7 +21,7 @@ class RulePolicy
      */
     public function view(User $user, Rule $rule): bool
     {
-        //
+        return $user->id === $rule->user_id; // Contoh: hanya pemilik yang bisa melihat
     }
 
     /**
@@ -29,7 +29,7 @@ class RulePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true; // Bisa dibuat aturan lebih lanjut
     }
 
     /**
@@ -37,7 +37,7 @@ class RulePolicy
      */
     public function update(User $user, Rule $rule): bool
     {
-        //
+        return $user->id === $rule->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class RulePolicy
      */
     public function delete(User $user, Rule $rule): bool
     {
-        //
+        return $user->id === $rule->user_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class RulePolicy
      */
     public function restore(User $user, Rule $rule): bool
     {
-        //
+        return $user->id === $rule->user_id;
     }
 
     /**
@@ -61,6 +61,6 @@ class RulePolicy
      */
     public function forceDelete(User $user, Rule $rule): bool
     {
-        //
+        return $user->id === $rule->user_id;
     }
 }

@@ -17,7 +17,7 @@ class HasilTesSeeder extends Seeder
             'user_id' => 1,
             'result' => 'Teknik Komputer dan Jaringan'
         ]);
-        HsilTes::create([
+        HasilTes::create([
             'user_id' => 2,
             'result' => 'Multimedia'
         ]);
