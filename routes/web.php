@@ -48,7 +48,7 @@ Route::post('/submit-answer-guest', [AppController::class, 'forwardChainingGuest
 
 
 Route::resources([
-    'symptoms' => PertanyaanController::class,
+    'pertanyaans' => PertanyaanController::class,
     'diseases' => JurusanController::class,
     'solutions' => SolutionController::class,
     'medicines' => ArtikelController::class,

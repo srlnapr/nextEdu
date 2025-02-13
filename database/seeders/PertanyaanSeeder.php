@@ -57,7 +57,7 @@ class PertanyaanSeeder extends Seeder
 
         foreach ($pertanyaans as $data) {
             Pertanyaan::create([
-                'pertanyaan_code' => $data[0],
+                'pertanyaans_code' => $data[0],
                 'pertanyaan' => $data[1],
             ]);
         }

@@ -13,7 +13,6 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -36,6 +35,7 @@
       </button>
     </div>
   @endif
+
   <main>
     <section class="pt-28 pb-16 lg:pt-36">
       <div class="container">
@@ -43,12 +43,10 @@
           <div class="w-full self-center px-4">
             <h1 class="text-base font-medium text-primary md:text-xl">
               Welcome to
-              <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Dia<span
-                  class="text-primary">Care</span>.
+              <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Dia<span class="text-primary">Care</span>.
               </p>
             </h1>
-            <h2 class="mb-3 mt-2 text-lg font-light text-primary lg:text-2xl">Dashboard. <span
-                class="font-bold">Admin</span>
+            <h2 class="mb-3 mt-2 text-lg font-light text-primary lg:text-2xl">Dashboard. <span class="font-bold">Admin</span>
             </h2>
           </div>
 
@@ -71,7 +69,7 @@
             </div>
             <div class="rounded-[4px] border border-green-500 bg-green-200 p-3 text-center">
               <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($artikelInfo) }}
+                {{ count($artikelsInfo ?? []) }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
                 Artikel
@@ -79,7 +77,7 @@
             </div>
             <div class="rounded-[4px] border border-indigo-500 bg-indigo-200 p-3 text-center">
               <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($usersInfo) }}
+                {{ count($usersInfo ?? []) }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
                 Pengguna
@@ -89,37 +87,31 @@
         </div>
 
         <div class="w-full self-center px-4">
-          <h1 class="text-2xl font-bold text-primary lg:text-3xl">
-          </h1>
+          <h1 class="text-2xl font-bold text-primary lg:text-3xl"></h1>
           <div class="mt-8">
             <div
               class="bayangan_field mx-auto mb-8 grid grid-cols-5 divide-x-2 border-2 border-primary bg-white p-3 py-4">
-              <div
-                class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/symptoms">
+              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
+                <a href="/pertanyaans">
                   Pertanyaan
                 </a>
               </div>
-              <div
-                class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/diseases">
+              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
+                <a href="/jurusans">
                   Jurusan
                 </a>
               </div>
-              <div
-                class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/medicines">
+              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
+                <a href="/artikels">
                   Artikel
                 </a>
               </div>
-              <div
-                class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
+              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
                 <a href="/rules">
                   Rule Base
                 </a>
               </div>
-              <div
-                class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
+              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
                 <a href="/users">
                   Users
                 </a>
@@ -135,7 +127,7 @@
   </main>
 
   @include('components.footer')
-  <script src="js/script.js"></script>
+  <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>
