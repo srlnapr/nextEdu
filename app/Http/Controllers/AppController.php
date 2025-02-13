@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DiagnoseResult;
+use App\Models\HasilTes;
 use Illuminate\Support\Facades\DB;
-use App\Models\Disease;
-use App\Models\Medicine;
+use App\Models\Jurusan;
+use App\Models\Artikel;
 use App\Models\Rule;
-use App\Models\Symptom;
+use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,46 +15,46 @@ class AppController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->except(['index', 'diagnose', 'medicine', 'about', 'forwardChaining', 'forwardChainingGuest']);
+        $this->middleware('admin')->except(['index', 'hasilTes', 'artikel', 'about', 'forwardChaining', 'forwardChainingGuest']);
     }
 
     public function index()
     {
         $user = User::all();
-        $disease = Disease::all();
-        $medicine = Medicine::all();
-        $diagnoseResults = DiagnoseResult::all();
+        $jurusan = Jurusan::all();
+        $artikel = Artikel::all();
+        $hasilTes = HasilTes::all();
         return view('pages.home', [
-            "disease" => $disease,
-            "user" => $user,
-            "medicine" => $medicine,
-            "diagnoseResults" => $diagnoseResults
+            'user' => $user,
+            'jurusan' => $jurusan,
+            'artikel' => $artikel,
+            'hasilTes' => $hasilTes
         ]);
     }
 
-    public function diagnose()
+    public function diagnosis()
     {
-        $diseases = Disease::all();
-        $symptoms = Symptom::all();
+        $jurusans = Jurusan::all();
+        $pertanyaans = Pertanyaan::all();
         return view('pages.diagnose', [
-            "symptoms" => $symptoms,
-            'symptomsInfo' => $symptoms,
-            'diseasesInfo' => $diseases,
+            "pertanyaans" => $pertanyaans,
+            'pertanyaanInfo' => $pertanyaans,
+            'jurusanInfo' => $jurusans,
         ]);
     }
 
-    public function medicine()
+    public function artikel()
     {
-        $medicines = Medicine::orderby('disease_id');
-        $diseases = Disease::all();
+        $artikel = Artikel::orderby('jurusan_id');
+        $jurusans = Jurusan::all();
 
         if (request('search')) {
-            $medicines->where('name', 'like', '%' . request('search') . '%');
+            $artikel->where('name', 'like', '%' . request('search') . '%');
         }
 
         return view('pages.medicinesPage', [
-            'medicines' => $medicines->paginate(8)->withQueryString(),
-            'diseases' => $diseases
+            'artikel' => $artikel->paginate(8)->withQueryString(),
+            'jurusans' => $jurusans
         ]);
     }
 
@@ -65,69 +65,69 @@ class AppController extends Controller
 
     public function logicRelation()
     {
-        $diseases = Disease::all();
-        $symptoms = Symptom::all();
+        $jurusans = Jurusan::all();
+        $pertanyaans = Pertanyaan::all();
         $rules = Rule::all();
 
-        $diseaseRelation = [];
-        for ($i = 0; $i < count($diseases); $i++) {
-            $diseaseRelation[$i]['id'] = $diseases[$i]['id'];
-            $diseaseRelation[$i]['name'] = $diseases[$i]['diseases'];
-            $diseaseRelation[$i]['rules'] = [];
+        $jurusanRelation = [];
+        for ($i = 0; $i < count($jurusans); $i++) {
+            $jurusanRelation[$i]['id'] = $jurusans[$i]['id'];
+            $jurusanRelation[$i]['name'] = $jurusans[$i]['jurusan'];
+            $jurusanRelation[$i]['rules'] = [];
 
-            for ($j = 0; $j < count($symptoms); $j++) {
+            for ($j = 0; $j < count($pertanyaans); $j++) {
                 $rule = 0;
                 for ($k = 0; $k < count($rules); $k++) {
                     if (
-                        $rules[$k]['symptom_id'] == $symptoms[$j]['id'] &&
-                        $rules[$k]['disease_id'] == $diseases[$i]['id']
+                        $rules[$k]['pertanyaan_id'] == $pertanyaans[$j]['id'] &&
+                        $rules[$k]['jurusan_id'] == $jurusans[$i]['id']
                     ) {
                         $rule = $rules[$k]['rule_value'];
                         break;
                     }
                 }
                 if (!$rule) {
-                    array_push($diseaseRelation[$i]['rules'], 0);
+                    array_push($jurusanRelation[$i]['rules'], 0);
                 } else {
-                    array_push($diseaseRelation[$i]['rules'], $rule);
+                    array_push($jurusanRelation[$i]['rules'], $rule);
                 }
             }
         }
 
-        $diseaseRelations = $diseaseRelation;
-        $medicinesInfo = Medicine::all();
+        $jurusanRelations = $jurusanRelation;
+        $artikelInfo = Artikel::all();
         $usersInfo = User::all();
 
 
         return view('components.admin.rules.view', [
-            'diseaseRelations' => $diseaseRelations,
-            'symptomsInfo' => $symptoms,
-            'diseasesInfo' => $diseases,
-            'medicinesInfo' => $medicinesInfo,
+            'jurusanRelations' => $jurusanRelations,
+            'pertanyaasnInfo' => $pertanyaans,
+            'jurusansInfo' => $jurusans,
+            'Info' => $artikelInfo,
             'usersInfo' => $usersInfo
         ]);
     }
 
     public function edit(int $id)
     {
-        $symptoms = Symptom::all();
+        $pertanyaans = Pertanyaan::all();
         $rules = Rule::all();
-        $diseases = Disease::all();
-        $disease = DB::table('diseases')->where('id', '=', $id)->get()[0];
+        $jurusans = Jurusan::all();
+        $jurusan = DB::table('jurusan')->where('id', '=', $id)->get()[0];
 
-        $diseaseDetail = array(
-            "id" => "$disease->id",
-            "diseases_code" => $disease->diseases_code,
-            "name" => $disease->diseases,
+        $jurusanDetail = array(
+            "id" => "$jurusans->id",
+            "jurusan_code" => $jurusan->jurusans_code,
+            "name" => $jurusan->jurusans,
             "rules" => [],
         );
 
-        for ($i = 0; $i < count($symptoms); $i++) {
+        for ($i = 0; $i < count($pertanyaans); $i++) {
             $rule = 0;
             for ($j = 0; $j < count($rules); $j++) {
                 if (
-                    $rules[$j]['symptom_id'] == $symptoms[$i]['id'] &&
-                    $rules[$j]['disease_id'] == $disease->id
+                    $rules[$j]['pertanyaan_id'] == $pertanyaans[$i]['id'] &&
+                    $rules[$j]['jurusan_id'] == $jurusans->id
                 ) {
                     $rule = $rules[$j]['rule_value'];
                     break;
@@ -135,23 +135,23 @@ class AppController extends Controller
             }
 
             if (!$rule) {
-                array_push($diseaseDetail['rules'], 0);
+                array_push($jurusanDetail['rules'], 0);
             } else {
-                array_push($diseaseDetail['rules'], $rule);
+                array_push($jurusanDetail['rules'], $rule);
             }
         }
         // dd($diseaseDetail);
 
-        $diseaseDetails = $diseaseDetail;
-        $medicinesInfo = Medicine::all();
+        $jurusanDetails = $jurusanDetail;
+        $artikelInfo = Artikel::all();
         $usersInfo = User::all();
 
 
         return view('components.admin.rules.edit', [
-            'diseaseDetails' => $diseaseDetails,
-            'diseasesInfo' => $diseases,
-            'symptomsInfo' => $symptoms,
-            'medicinesInfo' => $medicinesInfo,
+            'jurusanDetails' => $jurusanDetails,
+            'jurusansInfo' => $jurusans,
+            'pertanyaansInfo' => $pertanyaans,
+            'artikelInfo' => $artikelInfo,
             'usersInfo' => $usersInfo
         ]);
     }
@@ -163,8 +163,8 @@ class AppController extends Controller
         for ($i = 0; $i < count($data); $i++) {
             Rule::updateOrCreate(
                 [
-                    'disease_id' => $data[$i]['diseaseId'],
-                    'symptom_id' => $data[$i]['symptomId'],
+                    'jurusan_id' => $data[$i]['jurusanId'],
+                    'pertanyaan_id' => $data[$i]['pertanyaanId'],
                 ],
                 [
                     'rule_value' => $data[$i]['value']
@@ -184,27 +184,27 @@ class AppController extends Controller
     {
         $data = $request->data;
         $rules = Rule::all();
-        $diseases = Disease::all();
+        $jurusans = Jurusan::all();
 
         usort($data, function ($a, $b) {
-            return $a['symptomId'] - $b['symptomId'];
+            return $a['pertanyaanId'] - $b['pertanyaanId'];
         });
 
         $result = '';
-        for ($i = 0; $i < count($diseases); $i++) {
+        for ($i = 0; $i < count($jurusans); $i++) {
             $stats = '';
             $test = [];
             for ($j = 0; $j < count($rules); $j++) {
-                if ($diseases[$i]['id'] == $rules[$j]['disease_id']) {
+                if ($jurusans[$i]['id'] == $rules[$j]['jurusan_id']) {
                     array_push($test, [
-                        'symptomId' => $rules[$j]['symptom_id'],
+                        'pertanyaanId' => $rules[$j]['pertanyaan_id'],
                         'value' => $rules[$j]['rule_value']
                     ]);
                 }
             }
             for ($k = 0; $k < count($test); $k++) {
                 if (
-                    $test[$k]['symptomId'] == $data[$k]['symptomId'] &&
+                    $test[$k]['pertanyaanId'] == $data[$k]['pertanyaanId'] &&
                     $test[$k]['value'] == $data[$k]['value']
                 ) {
                     $stats = 'berhasil';
@@ -214,14 +214,14 @@ class AppController extends Controller
                 }
             }
             if ($stats == 'berhasil') {
-                $result = $diseases[$i]['diseases'];
+                $result = $jurusans[$i]['jurusan'];
                 break;
             } else {
-                $result = 'Negative';
+                $result = 'Salah jurusan ';
             }
         }
 
-        DiagnoseResult::create([
+        HasilTes::create([
             'user_id' => $id,
             'result' => $result
         ]);

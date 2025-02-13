@@ -11,7 +11,7 @@
 
           <div class="px-4">
               <a href="/">
-                  <img src="{{ asset(path: 'logo.png') }}" alt="Logo" class="h-16 w-auto">
+                  <img src="{{ asset(path: 'assets/logo-typo.png') }}" alt="Logo" class="h-19 w-14">
               </a>
           </div>
 

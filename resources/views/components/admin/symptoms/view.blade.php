@@ -25,7 +25,7 @@
             </div>
           </form>
         </div>
-        @if ($symptoms->count())
+        @if ($pertanyaans->count())
           <table class="mb-3 w-full rounded-xl text-slate-800">
             <thead class="text-slate-700">
               <tr>
@@ -44,16 +44,16 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($symptoms as $symptom)
+              @foreach ($pertanyaans as $pertanyaan)
                 <tr class="px-6 py-3 text-center">
                   <td class="border px-6 py-2">{{ $loop->iteration }}</td>
-                  <td class="border px-6 py-2">{{ $symptom['symptoms_code'] }}</td>
-                  <td class="border px-6 py-2 text-justify">{{ $symptom['symptoms'] }}</td>
+                  <td class="border px-6 py-2">{{ $pertanyaan['pertanyaan_code'] }}</td>
+                  <td class="border px-6 py-2 text-justify">{{ $pertanyaan['pertanyaan'] }}</td>
                   <td class="flex justify-center border px-6 py-2">
-                    <a class="mx-2 text-yellow-400" href="/symptoms/{{ $symptom['id'] }}/edit">
+                    <a class="mx-2 text-yellow-400" href="/symptoms/{{ $pertanyaan['id'] }}/edit">
                       Edit
                     </a>
-                    <form class="mx-2 text-red-400" action="/symptoms/{{ $symptom['id'] }}" method="post"
+                    <form class="mx-2 text-red-400" action="/symptoms/{{ $pertanyaan['id'] }}" method="post"
                       class="d-inline">
                       @method('delete')
                       @csrf
@@ -70,8 +70,9 @@
             </h1>
         @endif
         </table>
-        {{ $symptoms->links() }}
-      </div>
+        <div class="mt-4">
+          {{ $pertanyaans->links() }}
+      </div>      </div>
     </div>
   </div>
 @endsection

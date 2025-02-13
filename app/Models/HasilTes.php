@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HasilTes extends Model
 {
     use HasFactory;
+    protected $table = 'hasil_tes';
+
     protected $guarded = ['id'];
 }

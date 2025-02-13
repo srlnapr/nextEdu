@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="pt-28 pb-24 lg:pt-36 lg:pb-32">
+<section class="pt-28 pb-24 lg:pt-36 lg:pb-32 bg-backgroundLight">
   <div class="container">
     <div class="flex flex-wrap">
       <div class="w-full self-center px-4 lg:w-1/2">
@@ -47,14 +47,13 @@
         @endif
         @include('components.userInfo')
       </div>
-      <div
-        class="bayangan hidden w-full self-center rounded-sm border-2 border-primary bg-white px-4 md:block lg:w-1/2">
-        {{-- Lottie --}}
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player src="https://lottie.host/33d26164-5132-47c9-a5de-f9f9440da602/Uke0X1C7vH.json"
-          background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay class="mx-auto">
-        </lottie-player>
-      </div>
+      <img src="/assets/element1.png" alt="element1" class="absolute top-12 left-1/2 transform -translate-x-1/2">
+
+      <div style="position: relative; text-align: right; margin-left: 80px; margin-right: 10px;">
+    
+        <img src="/assets/gambar1.png" alt="gambar1" width="500px" height="600px">
+    </div>
+    
     </div>
   </div>
 </section>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DiagnoseResult;
-use App\Http\Requests\StoreDiagnoseResultRequest;
-use App\Http\Requests\UpdateDiagnoseResultRequest;
+use App\Models\HasilTes;
+use App\Http\Requests\StoreHasilTesRequest;
+use App\Http\Requests\UpdateHasilTesRequest; // Ensure this class exists in the specified namespace
 
-class DiagnoseResultController extends Controller
+class HasilTesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class DiagnoseResultController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDiagnoseResultRequest $request)
+    public function store(StoreHasilTesRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class DiagnoseResultController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DiagnoseResult $diagnoseResult)
+    public function show(HasilTes $hasilTes)
     {
         //
     }
@@ -43,7 +43,7 @@ class DiagnoseResultController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DiagnoseResult $diagnoseResult)
+    public function edit(HasilTes $hasilTes)
     {
         //
     }
@@ -51,7 +51,7 @@ class DiagnoseResultController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDiagnoseResultRequest $request, DiagnoseResult $diagnoseResult)
+    public function update(UpdateHasilTesRequest $request, HasilTes $hasilTes)
     {
         //
     }
@@ -59,7 +59,7 @@ class DiagnoseResultController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DiagnoseResult $diagnoseResult)
+    public function destroy(HasilTes $hasilTes)
     {
         //
     }

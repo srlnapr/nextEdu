@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('artikel', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('nama_jurusan_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('jurusan_id')->constrained('jurusan')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name', 50);
             $table->string('img', 50);
             $table->text('description');

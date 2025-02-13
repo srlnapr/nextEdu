@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DiagnoseResult;
+use App\Models\Hasil_Tes;
 use App\Models\Disease;
 use App\Models\Medicine;
 use App\Models\Symptom;
@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $diagnoseResults = DiagnoseResult::all();
+        $diagnoseResults = Hasil_Tes::all();
         $users = User::orderBy('id');
         $usersInfo = User::all();
         $symptomsInfo = Symptom::all();

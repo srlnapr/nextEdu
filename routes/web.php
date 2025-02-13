@@ -3,12 +3,12 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DiseaseController;
-use App\Http\Controllers\MedicineController;
-use App\Http\Controllers\MedicinesPage;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ArtikelPage;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SolutionController;
-use App\Http\Controllers\SymptomController;
+use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,9 +48,9 @@ Route::post('/submit-answer-guest', [AppController::class, 'forwardChainingGuest
 
 
 Route::resources([
-    'symptoms' => SymptomController::class,
-    'diseases' => DiseaseController::class,
+    'symptoms' => PertanyaanController::class,
+    'diseases' => JurusanController::class,
     'solutions' => SolutionController::class,
-    'medicines' => MedicineController::class,
+    'medicines' => ArtikelController::class,
     'users' => UserController::class,
 ]);

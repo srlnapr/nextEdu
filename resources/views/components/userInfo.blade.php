@@ -9,7 +9,8 @@
     </div>
   </div>
   <div class="grid grid-cols-3">
-    <div class="col-1 col-span-1 flex items-center justify-center text-2xl font-bold text-primary">{{ count($diagnoseResults) }}
+    <div class="col-1 col-span-1 flex items-center justify-center text-2xl font-bold text-primary">{{ count($hasil_tes ?? []) }}
+
     </div>
     <div class="col-2 col-span-2">
       <p class="text-xs lg:text-base">Hasil</p>

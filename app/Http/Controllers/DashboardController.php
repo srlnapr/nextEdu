@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DiagnoseResult;
-use App\Models\Disease;
-use App\Models\Medicine;
-use App\Models\Solution;
-use App\Models\Symptom;
+use App\Models\Hasil_Tes;
+use App\Models\Jurusan;
+use App\Models\Artikel;
+use App\Models\SaranPekerjaan;
+use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,29 +14,29 @@ class DashboardController extends Controller
 {
     public function user()
     {
-        $diagnoseResults = DiagnoseResult::all();
-        $diseases = Disease::all();
-        $medicines = Medicine::all();
-        $solutions = Solution::all();
+        $hasilTes = Hasil_Tes::all();
+        $jurusan = Jurusan::all();
+        $artikel = Artikel::all();
+        $saran_pekerjaan = SaranPekerjaan::all();
         return view('pages.dashboard', [
-            'diagnoseResults' => $diagnoseResults,
-            'diseases' => $diseases,
-            'medicines' => $medicines,
-            'solutions' => $solutions
+            'hasilTes' => $hasilTes,
+            'diseases' => $jurusan,
+            'artikel' => $artikel,
+            'saran_pekerjaan' => $saran_pekerjaan
         ]);
     }
 
     public function admin()
     {
-        $symptomsInfo = Symptom::all();
-        $diseasesInfo = Disease::all();
-        $medicinesInfo = Medicine::all();
+        $pertanyaanInfo = Pertanyaan::all();
+        $jurusanInfo = Jurusan::all();
+        $artikelInfo = Artikel::all();
         $usersInfo = User::all();
 
         return view('components.admin.base', [
-            'symptomsInfo' => $symptomsInfo,
-            'diseasesInfo' => $diseasesInfo,
-            'medicinesInfo' => $medicinesInfo,
+            'symptomsInfo' => $pertanyaanInfo,
+            'jurusanInfo' => $jurusanInfo,
+            'artikelInfo' => $artikelInfo,
             'usersInfo' => $usersInfo
         ]);
     }

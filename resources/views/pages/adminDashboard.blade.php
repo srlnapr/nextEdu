@@ -55,26 +55,26 @@
           <div class="grid w-full grid-cols-4 gap-1 self-center px-4">
             <div class="rounded-[4px] border border-sky-500 bg-sky-200 p-3 text-center">
               <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($symptomsInfo) }}
+                {{ count($pertanyaansInfo ?? []) }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
-                Symptoms
+                Pertanyaan
               </p>
             </div>
             <div class="rounded-[4px] border border-pink-500 bg-pink-200 p-3 text-center">
               <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($diseasesInfo) - 1 }}
+                {{ count($jurusansInfo ?? []) - 1 }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
-                Diseases
+                Jurusan
               </p>
             </div>
             <div class="rounded-[4px] border border-green-500 bg-green-200 p-3 text-center">
               <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($medicinesInfo) }}
+                {{ count($artikelInfo) }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
-                Medicines
+                Artikel
               </p>
             </div>
             <div class="rounded-[4px] border border-indigo-500 bg-indigo-200 p-3 text-center">
@@ -82,7 +82,7 @@
                 {{ count($usersInfo) }}
               </h1>
               <p class="font-base text-base text-primary lg:text-xl">
-                Users
+                Pengguna
               </p>
             </div>
           </div>
@@ -97,19 +97,19 @@
               <div
                 class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
                 <a href="/symptoms">
-                  Symptoms
+                  Pertanyaan
                 </a>
               </div>
               <div
                 class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
                 <a href="/diseases">
-                  Diseases
+                  Jurusan
                 </a>
               </div>
               <div
                 class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
                 <a href="/medicines">
-                  Medicines
+                  Artikel
                 </a>
               </div>
               <div

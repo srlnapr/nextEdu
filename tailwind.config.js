@@ -1,3 +1,5 @@
+const { purple } = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -15,7 +17,8 @@ module.exports = {
       colors: {
         primary: "#030723",
         secondary: "#3b82f6",
-      },
+        backgroundLight: "#FEFCFB",
+       },
       screens: {
         "2xl": "1320px",
       },
