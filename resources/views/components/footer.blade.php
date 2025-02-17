@@ -3,13 +3,13 @@
     <div class="flex flex-wrap">
       <div class="mb-12 w-full flex-col place-items-center font-medium md:flex md:w-1/3">
         <ul>
-          <h2 class="mb-5 text-4xl font-bold text-white selection:bg-blue-500 selection:text-blue-100">Dia<span
-              class="text-secondary">Care</span>.</h2>
-          <h3 class="mb-2 text-2xl font-bold text-white selection:bg-blue-500 selection:text-blue-100">Founder
+          <h2 class="mb-5 text-4xl font-bold text-white selection:bg-blue-500 selection:text-blue-100">Next<span
+              class="text-secondary">Edu</span>.</h2>
+          {{-- <h3 class="mb-2 text-2xl font-bold text-white selection:bg-blue-500 selection:text-blue-100">Founder --}}
           </h3>
-          <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">Vincent</p>
-          <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">00000037401</p>
-          <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">vincent14@student.umn.ac.id</p>
+          {{-- <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">Vincent</p> --}}
+          {{-- <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">00000037401</p> --}}
+          {{-- <p class="text-slate-400 selection:bg-blue-500 selection:text-blue-100">vincent14@student.umn.ac.id</p> --}}
         </ul>
       </div>
       <div class="mb-12 w-full flex-col place-items-center md:flex md:w-1/3">

@@ -18,6 +18,8 @@ module.exports = {
         primary: "#030723",
         secondary: "#3b82f6",
         backgroundLight: "#FEFCFB",
+        backgroundPrimary: "#FFFFFF",
+        purpleMain: "#493D9E"
        },
       screens: {
         "2xl": "1320px",

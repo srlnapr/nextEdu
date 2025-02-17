@@ -99,3 +99,31 @@ body::-webkit-scrollbar-button {
 .aktif{
     @apply bg-white text-black border-black rounded-sm;
 }
+
+.relative-container {
+    position: relative;
+}
+
+.floating-card {
+    position: absolute;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.floating-card:hover {
+    transform: translateY(-15px);
+}
+
+.floating-card {
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(-10px); }
+}
