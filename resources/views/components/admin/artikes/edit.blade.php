@@ -6,32 +6,32 @@
       <div class="self-center lg:w-2/3">
         <div class="space-beetween flex">
           <h1 class="text-2xl font-bold text-primary lg:text-3xl">
-            Edit <span class="text-secondary">Medicine</span>
+            Edit <span class="text-secondary">Artikel</span>
           </h1>
           <button
             class="btnnn ml-5 rounded-sm border-2 border-black bg-black py-2 px-5 text-white duration-300 ease-out hover:bg-white hover:text-black">
-            <a href="/medicines">Back</a>
+            <a href="/artikels">Back</a>
           </button>
         </div>
-        <form class="mt-5" method="post" action="/medicines/{{ $medicine['id'] }}">
+        <form class="mt-5" method="post" action="/artikels/{{ $artikel['id'] }}">
           @method('put')
           @csrf
           <div class="w-full lg:mx-auto">
             <div class="mb-4 w-full px-4">
-              <label for="disease_id" class="text-base font-bold text-primary lg:text-xl">
-                Diseases
+              <label for="jurusan_id" class="text-base font-bold text-primary lg:text-xl">
+                jurusans
               </label>
-              <select name="disease_id" id="disease_id"
-                class="@error('disease_id') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500">
-                @foreach ($diseasesInfo as $disease)
-                  @if ($disease['id'] == $medicine['disease_id'])
-                    <option value="{{ $disease['id'] }}" selected>{{ $disease['diseases'] }}</option>
+              <select name="jurusan_id" id="jurusan_id"
+                class="@error('jurusan_id') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500">
+                @foreach ($jurusansInfo as $jurusan)
+                  @if ($jurusan['id'] == $artikel['jurusan_id'])
+                    <option value="{{ $jurusan['id'] }}" selected>{{ $jurusan['jurusans'] }}</option>
                   @else
-                    <option value="{{ $disease['id'] }}">{{ $disease['diseases'] }}</option>
+                    <option value="{{ $jurusan['id'] }}">{{ $jurusan['jurusans'] }}</option>
                   @endif
                 @endforeach
               </select>
-              @error('disease_id')
+              @error('jurusan_id')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
@@ -39,7 +39,7 @@
               <label for="name" class="text-base font-bold text-primary lg:text-xl">
                 Name
               </label>
-              <input type="text" id="name" name="name" value="{{ @old('name', $medicine['name']) }}"
+              <input type="text" id="name" name="name" value="{{ @old('name', $artikel['name']) }}"
                 class="@error('name') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
               @error('name')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
@@ -70,7 +70,7 @@
               <label for="dose" class="text-base font-bold text-primary lg:text-xl">
                 Dose
               </label>
-              <input type="text" id="dose " name="dose" value="{{ @old('dose', $medicine['dose']) }}"
+              <input type="text" id="dose " name="dose" value="{{ @old('dose', $artikel['dose']) }}"
                 class="@error('dose') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
               @error('dose')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
@@ -79,7 +79,7 @@
             <div class="mt-10 w-full px-4">
               <button type="submit"
                 class="btnn w-full rounded-sm border-2 border-black bg-black py-3 px-8 text-white duration-300 ease-out hover:bg-white hover:text-black focus:outline-none focus:ring focus:ring-blue-500">
-                Edit Medicine
+                Edit Artikel
               </button>
             </div>
           </div>

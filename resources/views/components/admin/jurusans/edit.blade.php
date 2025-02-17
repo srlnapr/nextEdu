@@ -6,35 +6,35 @@
       <div class="self-center lg:w-2/3">
         <div class="space-beetween flex">
           <h1 class="text-2xl font-bold text-primary lg:text-3xl">
-            Edit <span class="text-secondary">Diseases</span>
+            Edit <span class="text-secondary">Jurusans</span>
           </h1>
           <button
             class="btnnn ml-5 rounded-sm border-2 border-black bg-black py-2 px-5 text-white duration-300 ease-out hover:bg-white hover:text-black">
-            <a href="/diseases">Back</a>
+            <a href="/jurusans">Back</a>
           </button>
         </div>
-        <form class="mt-5" method="post" action="/diseases/{{ $disease['id'] }}">
+        <form class="mt-5" method="post" action="/jurusans/{{ $disease['id'] }}">
           @method('put')
           @csrf
           <div class="w-full lg:mx-auto">
             <div class="mb-4 w-full px-4">
-              <label for="diseases_code" class="text-base font-bold text-primary lg:text-xl">
+              <label for="jurusans_code" class="text-base font-bold text-primary lg:text-xl">
                 Diseases Code
               </label>
-              <input type="text" id="diseases_code" name="diseases_code"
-                value="{{ @old('diseases_code', $disease['diseases_code']) }}"
-                class="@error('diseases_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('diseases_code')
+              <input type="text" id="jurusans_code" name="jurusans_code"
+                value="{{ @old('jurusans_code', $disease['jurusans_code']) }}"
+                class="@error('jurusans_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+              @error('jurusans_code')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
             <div class="mb-4 w-full px-4">
-              <label for="diseases" class="text-base font-bold text-primary lg:text-xl">
-                Diseases
+              <label for="jurusans" class="text-base font-bold text-primary lg:text-xl">
+                Jurusans
               </label>
-              <input type="text" id="diseases " name="diseases" value="{{ @old('diseases', $disease['diseases']) }}"
-                class="@error('diseases') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('diseases')
+              <input type="text" id="jurusans " name="jurusans" value="{{ @old('jurusans', $disease['jurusans']) }}"
+                class="@error('jurusans') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+              @error('jurusans')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
@@ -61,7 +61,7 @@
             <div class="mt-10 w-full px-4">
               <button type="submit"
                 class="btnn w-full rounded-sm border-2 border-black bg-black py-3 px-8 text-white duration-300 ease-out hover:bg-white hover:text-black focus:outline-none focus:ring focus:ring-blue-500">
-                Edit Disease
+                Edit Jurusans
               </button>
             </div>
           </div>

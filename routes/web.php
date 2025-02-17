@@ -7,7 +7,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ArtikelPage;
 use App\Http\Controllers\RuleController;
-use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\SaranPekerjaanController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +50,7 @@ Route::post('/submit-answer-guest', [AppController::class, 'forwardChainingGuest
 Route::resources([
     'pertanyaans' => PertanyaanController::class,
     'diseases' => JurusanController::class,
-    'solutions' => SolutionController::class,
+    'saranpekerjaans' => SaranPekerjaanController::class,
     'medicines' => ArtikelController::class,
     'users' => UserController::class,
 ]);

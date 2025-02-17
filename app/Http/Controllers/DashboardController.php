@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hasil_Tes;
+use App\Models\HasilTes;
 use App\Models\Jurusan;
 use App\Models\Artikel;
 use App\Models\SaranPekerjaan;
@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function user()
     {
-        $hasilTes = Hasil_Tes::all();
+        $hasilTes = HasilTes::all();
         $jurusan = Jurusan::all();
         $artikel = Artikel::all();
         $saran_pekerjaan = SaranPekerjaan::all();

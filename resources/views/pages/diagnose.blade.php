@@ -7,7 +7,7 @@
         <div class="w-full self-center px-4">
           <h1 class="text-base font-medium text-primary md:text-xl">
             Welcome to
-            <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Dia<span class="text-primary">Care</span>.
+            <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Next<span class="text-primary">Edu</span>.
             </p>
           </h1>
           <h2 class="mb-3 mt-2 text-lg font-light text-primary lg:text-2xl">Diagnose. <span class="font-bold capitalize">
@@ -107,8 +107,7 @@
                         @endfor
                       </tbody>
                     @else
-                      <h1 class="mt-2 mb-4 border p-3 text-center text-lg font-light text-primary lg:text-2xl">There is no
-                        Symptoms.
+                      <h1 class="mt-2 mb-4 border p-3 text-center text-lg font-light text-primary lg:text-2xl">Tidak ada Pertanyaans.
                       </h1>
                   @endif
                   </table>

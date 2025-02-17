@@ -7,13 +7,13 @@
         <div class="w-full self-center px-4 lg:w-1/2">
           <h1 class="text-base font-medium text-primary md:text-xl">
             What is
-            <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Dia<span class="text-primary">Care</span>?
+            <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Next<span class="text-primary">Edu</span>?
             </p>
           </h1>
           <h2 class="mb-5 mt-2 text-lg font-light text-primary lg:text-2xl">A place that provides all about Diabetes
             Mellitus.</h2>
           <p class="mb-5 max-w-md text-xl font-base">
-            <span class="text-primary">DiaCare</span> is a web-based <span 
+            <span class="text-primary">NextEdu</span> is a web-based <span 
               class="text-secondary">diagnose application</span> to help people diagnose
               diabetes mellitus disease.
           </p>
