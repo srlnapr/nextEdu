@@ -14,10 +14,11 @@ class DashboardController extends Controller
 {
     public function user()
     {
-        $hasilTes = HasilTes::all();
-        $jurusan = Jurusan::all();
-        $artikel = Artikel::all();
-        $saran_pekerjaan = SaranPekerjaan::all();
+        $hasilTes = HasilTes::all() ?? collect();
+        $jurusan = Jurusan::all() ?? collect();
+        $artikel = Artikel::all() ?? collect();
+        $saran_pekerjaan = SaranPekerjaan::all() ?? collect();
+
         return view('pages.dashboard', [
             'hasilTes' => $hasilTes,
             'diseases' => $jurusan,
@@ -28,13 +29,13 @@ class DashboardController extends Controller
 
     public function admin()
     {
-        $pertanyaanInfo = Pertanyaan::all();
-        $jurusanInfo = Jurusan::all();
-        $artikelInfo = Artikel::all();
-        $usersInfo = User::all();
+        $pertanyaanInfo = Pertanyaan::all() ?? collect();
+        $jurusanInfo = Jurusan::all() ?? collect();
+        $artikelInfo = Artikel::all() ?? collect();
+        $usersInfo = User::all() ?? collect();
 
         return view('components.admin.base', [
-            'symptomsInfo' => $pertanyaanInfo,
+            'pertanyaansInfo' => $pertanyaanInfo,
             'jurusanInfo' => $jurusanInfo,
             'artikelInfo' => $artikelInfo,
             'usersInfo' => $usersInfo

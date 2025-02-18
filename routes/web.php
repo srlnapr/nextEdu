@@ -5,7 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ArtikelController;
-use App\Http\Controllers\ArtikelPage;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SaranPekerjaanController;
 use App\Http\Controllers\PertanyaanController;
@@ -24,9 +23,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'index']);
-Route::get('/diagnose', [AppController::class, 'diagnose'])->middleware('auth');
+Route::get('/diagnose', [AppController::class, 'hasilTes'])->middleware('auth');
 Route::get('/about', [AppController::class, 'about']);
-Route::get('/medicinesPage', [AppController::class, 'medicine']);
+Route::get('/artikelsPage', [AppController::class, 'artikel']);
+
+// Tambahkan rute untuk halaman hasil tes
+Route::get('/hasil-tes', [AppController::class, 'hasilTes'])->name('hasilTes')->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
@@ -46,11 +48,10 @@ Route::post('/rules-change', [AppController::class, 'update']);
 Route::post('/submit-answer/{id}', [AppController::class, 'forwardChaining']);
 Route::post('/submit-answer-guest', [AppController::class, 'forwardChainingGuest']);
 
-
 Route::resources([
     'pertanyaans' => PertanyaanController::class,
-    'diseases' => JurusanController::class,
+    'jurusans' => JurusanController::class,
     'saranpekerjaans' => SaranPekerjaanController::class,
-    'medicines' => ArtikelController::class,
+    'artikels' => ArtikelController::class,
     'users' => UserController::class,
 ]);

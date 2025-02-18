@@ -23,7 +23,7 @@ class JurusanController extends Controller
     public function index()
     {
         $saranpekerjaans = SaranPekerjaan::orderBy('jurusan_id');
-        $jurusans = Jurusan::orderBy('jurusans_code');
+        $jurusans = Jurusan::orderBy('jurusan_code');
         $jurusansInfo = Jurusan::all();
         $pertanyaansInfo = Pertanyaan::all();
         $artikelsInfo = Artikel::all();

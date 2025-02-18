@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hasil_Tes;
-use App\Models\Disease;
-use App\Models\Medicine;
-use App\Models\Symptom;
+use App\Models\HasilTes;
+use App\Models\Jurusan;
+use App\Models\Artikel;
+use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,23 +19,23 @@ class UserController extends Controller
      */
     public function index()
     {
-        $diagnoseResults = Hasil_Tes::all();
+        $hasilTes = HasilTes::all();
         $users = User::orderBy('id');
         $usersInfo = User::all();
-        $symptomsInfo = Symptom::all();
-        $diseasesInfo = Disease::all();
-        $medicinesInfo = Medicine::all();
+        $pertanyaansInfo = Pertanyaan::all();
+        $jurusansInfo = Jurusan::all();
+        $artikelsInfo = Artikel::all();
 
         if (request('search')){
             $users->where('name', 'like', '%' . request('search') . '%');
         }
 
         return view('components.admin.users.view', [
-            'diagnoseResults' => $diagnoseResults,
+            'hasilTes' => $hasilTes,
             'users' => $users->paginate(15)->withQueryString(),
-            'symptomsInfo' => $symptomsInfo,
-            'diseasesInfo' => $diseasesInfo,
-            'medicinesInfo' => $medicinesInfo,
+            'pertanyaansInfo' => $pertanyaansInfo,
+            'jurusansInfo' => $jurusansInfo,
+            'artikelsInfo' => $artikelsInfo,
             'usersInfo' => $usersInfo
         ]);
     }

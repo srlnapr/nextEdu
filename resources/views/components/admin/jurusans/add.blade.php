@@ -6,7 +6,7 @@
       <div class="self-center lg:w-2/3">
         <div class="space-beetween flex">
           <h1 class="text-2xl font-bold text-primary lg:text-3xl">
-            Add <span class="text-secondary">Jurusans</span>
+            Add <span class="text-secondary">Jurusan</span>
           </h1>
           <button
             class="btnnn ml-5 rounded-sm border-2 border-black bg-black py-2 px-5 text-white duration-300 ease-out hover:bg-white hover:text-black">
@@ -20,9 +20,9 @@
               <label for="jurusans_code" class="text-base font-bold text-primary lg:text-xl">
                 jurusans Code
               </label>
-              <input type="text" id="jurusans_code" name="jurusans_code" value="{{ @old('jurusans_code') }}"
-                class="@error('jurusans_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('jurusans_code')
+              <input type="text" id="jurusan_code" name="jurusans_code" value="{{ @old('jurusan_code') }}"
+                class="@error('jurusan_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+              @error('jurusan_code')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
@@ -30,7 +30,7 @@
               <label for="jurusans" class="text-base font-bold text-primary lg:text-xl">
                 Jurusans
               </label>
-              <input type="text" id="jurusans " name="jurusans" value="{{ @old('jurusans') }}"
+              <input type="text" id="jurusans " name="jurusans" value="{{ @old('jurusan') }}"
                 class="@error('jurusans') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
               @error('jurusans')
                 <p class="mt-2 text-red-500">{{ $message }}</p>

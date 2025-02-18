@@ -32,6 +32,12 @@ class AppController extends Controller
         ]);
     }
 
+    public function hasilTes()
+    {
+        $hasilTes = HasilTes::all(); // Mengambil semua hasil tes dari database
+        return view('pages.hasilTes', compact('hasilTes')); // Mengirim data ke view
+    }
+
     public function diagnosis()
     {
         $jurusans = Jurusan::all();
@@ -86,25 +92,14 @@ class AppController extends Controller
                         break;
                     }
                 }
-                if (!$rule) {
-                    array_push($jurusanRelation[$i]['rules'], 0);
-                } else {
-                    array_push($jurusanRelation[$i]['rules'], $rule);
-                }
+                $jurusanRelation[$i]['rules'][] = $rule ?: 0;
             }
         }
 
-        $jurusanRelations = $jurusanRelation;
-        $artikelInfo = Artikel::all();
-        $usersInfo = User::all();
-
-
         return view('components.admin.rules.view', [
-            'jurusanRelations' => $jurusanRelations,
-            'pertanyaasnInfo' => $pertanyaans,
+            'jurusanRelations' => $jurusanRelation,
+            'pertanyaansInfo' => $pertanyaans,
             'jurusansInfo' => $jurusans,
-            'Info' => $artikelInfo,
-            'usersInfo' => $usersInfo
         ]);
     }
 
@@ -113,46 +108,24 @@ class AppController extends Controller
         $pertanyaans = Pertanyaan::all();
         $rules = Rule::all();
         $jurusans = Jurusan::all();
-        $jurusan = DB::table('jurusan')->where('id', '=', $id)->get()[0];
+        $jurusan = DB::table('jurusan')->where('id', '=', $id)->first();
 
-        $jurusanDetail = array(
-            "id" => "$jurusans->id",
-            "jurusan_code" => $jurusan->jurusans_code,
-            "name" => $jurusan->jurusans,
+        $jurusanDetail = [
+            "id" => $jurusan->id,
+            "jurusan_code" => $jurusan->jurusan_code,
+            "name" => $jurusan->jurusan,
             "rules" => [],
-        );
+        ];
 
-        for ($i = 0; $i < count($pertanyaans); $i++) {
-            $rule = 0;
-            for ($j = 0; $j < count($rules); $j++) {
-                if (
-                    $rules[$j]['pertanyaan_id'] == $pertanyaans[$i]['id'] &&
-                    $rules[$j]['jurusan_id'] == $jurusans->id
-                ) {
-                    $rule = $rules[$j]['rule_value'];
-                    break;
-                }
-            }
-
-            if (!$rule) {
-                array_push($jurusanDetail['rules'], 0);
-            } else {
-                array_push($jurusanDetail['rules'], $rule);
-            }
+        foreach ($pertanyaans as $pertanyaan) {
+            $rule = collect($rules)->firstWhere(fn($r) => $r->pertanyaan_id == $pertanyaan->id && $r->jurusan_id == $jurusan->id);
+            $jurusanDetail['rules'][] = $rule->rule_value ?? 0;
         }
-        // dd($diseaseDetail);
-
-        $jurusanDetails = $jurusanDetail;
-        $artikelInfo = Artikel::all();
-        $usersInfo = User::all();
-
 
         return view('components.admin.rules.edit', [
-            'jurusanDetails' => $jurusanDetails,
+            'jurusanDetails' => $jurusanDetail,
             'jurusansInfo' => $jurusans,
             'pertanyaansInfo' => $pertanyaans,
-            'artikelInfo' => $artikelInfo,
-            'usersInfo' => $usersInfo
         ]);
     }
 
@@ -160,14 +133,14 @@ class AppController extends Controller
     {
         $data = $request->data;
 
-        for ($i = 0; $i < count($data); $i++) {
+        foreach ($data as $item) {
             Rule::updateOrCreate(
                 [
-                    'jurusan_id' => $data[$i]['jurusanId'],
-                    'pertanyaan_id' => $data[$i]['pertanyaanId'],
+                    'jurusan_id' => $item['jurusanId'],
+                    'pertanyaan_id' => $item['pertanyaanId'],
                 ],
                 [
-                    'rule_value' => $data[$i]['value']
+                    'rule_value' => $item['value']
                 ]
             );
         }
@@ -176,8 +149,6 @@ class AppController extends Controller
             'status' => 200,
             'message' => 'Rule base was updated successfully',
         ], 200);
-
-        // return redirect('/rules')->with('success', 'Rule base was updated successfully');
     }
 
     public function forwardChaining(Request $request, string $id)
@@ -186,38 +157,18 @@ class AppController extends Controller
         $rules = Rule::all();
         $jurusans = Jurusan::all();
 
-        usort($data, function ($a, $b) {
-            return $a['pertanyaanId'] - $b['pertanyaanId'];
-        });
+        usort($data, fn($a, $b) => $a['pertanyaanId'] - $b['pertanyaanId']);
 
-        $result = '';
-        for ($i = 0; $i < count($jurusans); $i++) {
-            $stats = '';
-            $test = [];
-            for ($j = 0; $j < count($rules); $j++) {
-                if ($jurusans[$i]['id'] == $rules[$j]['jurusan_id']) {
-                    array_push($test, [
-                        'pertanyaanId' => $rules[$j]['pertanyaan_id'],
-                        'value' => $rules[$j]['rule_value']
-                    ]);
-                }
-            }
-            for ($k = 0; $k < count($test); $k++) {
-                if (
-                    $test[$k]['pertanyaanId'] == $data[$k]['pertanyaanId'] &&
-                    $test[$k]['value'] == $data[$k]['value']
-                ) {
-                    $stats = 'berhasil';
-                } else {
-                    $stats = 'gagal';
-                    break;
-                }
-            }
-            if ($stats == 'berhasil') {
-                $result = $jurusans[$i]['jurusan'];
+        $result = 'Salah jurusan ';
+        foreach ($jurusans as $jurusan) {
+            $matched = collect($rules)
+                ->where('jurusan_id', $jurusan->id)
+                ->zip($data)
+                ->every(fn($pair) => $pair[0]['pertanyaan_id'] == $pair[1]['pertanyaanId'] && $pair[0]['rule_value'] == $pair[1]['value']);
+
+            if ($matched) {
+                $result = $jurusan->jurusan;
                 break;
-            } else {
-                $result = 'Salah jurusan ';
             }
         }
 
@@ -229,19 +180,16 @@ class AppController extends Controller
         return response()->json([
             'status' => 200,
             'user_id' => $id,
-            'stats' => $stats,
-            'result' => $result,
-            'test' => $test,
-            'data' => $data
+            'result' => $result
         ], 200);
     }
 
-    //     public function forwardChainingGuest(Request $request)
-//     {
-//         return response()->json([
-//             'status' => 200,
-//             'message' => 'masuk guest',
-//             'data' => $request['data']
-//         ], 200);
-//     }
+    public function forwardChainingGuest(Request $request)
+    {
+        return response()->json([
+            'status' => 200,
+            'message' => 'masuk guest',
+            'data' => $request->data
+        ], 200);
+    }
 }
