@@ -28,7 +28,7 @@ Route::get('/about', [AppController::class, 'about']);
 Route::get('/artikelsPage', [AppController::class, 'artikel']);
 
 // Tambahkan rute untuk halaman hasil tes
-Route::get('/hasil-tes', [AppController::class, 'hasilTes'])->name('hasilTes')->middleware('auth');
+Route::get('/hasil-tes', [AppController::class, 'hasilTes'])->name(name: 'hasilTes')->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);

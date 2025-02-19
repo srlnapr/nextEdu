@@ -20,19 +20,20 @@
               <label for="jurusans_code" class="text-base font-bold text-primary lg:text-xl">
                 jurusans Code
               </label>
-              <input type="text" id="jurusan_code" name="jurusans_code" value="{{ @old('jurusan_code') }}"
-                class="@error('jurusan_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+              <input type="text" id="jurusan_code" name="jurusan_code" value="{{ old('jurusan_code') }}"
+              class="@error('jurusan_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+          
               @error('jurusan_code')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
             <div class="mb-4 w-full px-4">
-              <label for="jurusans" class="text-base font-bold text-primary lg:text-xl">
+              <label for="jurusan" class="text-base font-bold text-primary lg:text-xl">
                 Jurusans
               </label>
-              <input type="text" id="jurusans " name="jurusans" value="{{ @old('jurusan') }}"
+              <input type="text" id="jurusan " name="jurusan" value="{{ @old('jurusan') }}"
                 class="@error('jurusans') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('jurusans')
+              @error('jurusan')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>

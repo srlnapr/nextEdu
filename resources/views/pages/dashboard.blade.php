@@ -1,5 +1,5 @@
 @php
-  $person = $diagnoseResults->where('user_id', auth()->user()->id);
+  $person = $hasilTes->where('user_id', auth()->user()->id);
   // dd($person);
   foreach ($person as $p) {
       // echo $p;

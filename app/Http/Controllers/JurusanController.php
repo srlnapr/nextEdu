@@ -13,7 +13,8 @@ use App\Models\Rule;
 
 class JurusanController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('admin')->except('show');
     }
 
@@ -22,133 +23,116 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        $saranpekerjaans = SaranPekerjaan::orderBy('jurusan_id');
-        $jurusans = Jurusan::orderBy('jurusan_code');
-        $jurusansInfo = Jurusan::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $artikelsInfo = Artikel::all();
-        $usersInfo = User::all();
-
-        if (request('search')){
-            $jurusans->where('jurusans', 'like', '%' . request('search') . '%');
+        $jurusanList = Jurusan::orderBy('jurusan_code', 'asc');
+        $saranPekerjaanList = SaranPekerjaan::orderBy('jurusan_id', 'asc');
+    
+        if (request('search')) {
+            $jurusanList = $jurusanList->where('jurusan', 'like', '%' . request('search') . '%');
         }
-
-        if (request('searchSol')){
-            $saranpekerjaans->where('saranpekerjaans', 'like', '%' . request('searchSol') . '%');
+    
+        if (request('searchSol')) {
+            $saranPekerjaanList = $saranPekerjaanList->where('saranpekerjaan', 'like', '%' . request('searchSol') . '%');
         }
-
+    
         return view('components.admin.jurusans.view', [
-            'jurusans' => $jurusans->paginate(10)->withQueryString(),
-            'saranpekerjaans' => $saranpekerjaans->paginate(10)->withQueryString(),
-            'jurusansInfo' => $jurusansInfo,
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'artikelsInfo' => $artikelsInfo,
-            'usersInfo' => $usersInfo
+            'jurusanList' => $jurusanList->paginate(10)->withQueryString(),
+            'saranPekerjaanList' => $saranPekerjaanList->paginate(10)->withQueryString(),
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
         ]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $jurusansInfo = Jurusan::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $artikelsInfo = Artikel::all();
-        $usersInfo = User::all();
-
         return view('components.admin.jurusans.add', [
-            'jurusansInfo' => $jurusansInfo,
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'artikelsInfo' => $artikelsInfo,
-            'usersInfo' => $usersInfo
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
         ]);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreJurusanRequest $request)
     {
         $validatedData = $request->validate([
-            'jurusans_code' => 'required',
-            'jurusans' => 'required',
+            'jurusan_code' => 'required',
+            'jurusan' => 'required',
             'type' => 'required',
             'description' => 'required',
         ]);
-
+    
         $validatedData['img'] = 'https://source.unsplash.com/bkc-m0iZ4Sk';
-
-        $jurusans = Jurusan::create($validatedData);
-        $pertanyaans = Pertanyaan::all();
-
-        for($i = 0; $i < count($pertanyaans); $i++){
+    
+        $jurusan = Jurusan::create($validatedData);
+        
+        $pertanyaanList = Pertanyaan::all();
+        foreach ($pertanyaanList as $pertanyaan) {
             Rule::create([
-                'jurusan_id' => $jurusans->id,
-                'pertanyaan_id' => $pertanyaans[$i]->id,
+                'jurusan_id' => $jurusan->id,
+                'pertanyaan_id' => $pertanyaan->id,
                 'rule_value' => 0
             ]);
         }
+    
         return redirect('/jurusans')->with('success', 'Jurusan berhasil ditambahkan');
     }
-
+    
     /**
      * Display the specified resource.
      */
     public function show(Jurusan $jurusan)
     {
-        $saranpekerjaans = SaranPekerjaan::all();
-        $articles = Artikel::all();
         return view('pages.jurusanDetail', [
             'jurusan' => $jurusan,
-            'saranpekerjaans' => $saranpekerjaans,
-            'articles' => $articles
+            'saranPekerjaanList' => SaranPekerjaan::where('jurusan_id', $jurusan->id)->get(),
+            'artikelList' => Artikel::where('jurusan_id', $jurusan->id)->get()
         ]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Jurusan $jurusan)
     {
-        $jurusansInfo = Jurusan::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $artikelsInfo = Artikel::all();
-        $usersInfo = User::all();
-
         return view('components.admin.jurusans.edit', [
             'jurusan' => $jurusan,
-            'jurusansInfo' => $jurusansInfo,
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'artikelsInfo' => $artikelsInfo,
-            'usersInfo' => $usersInfo
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
         ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateJurusanRequest $request, Jurusan $jurusan)
     {
-        $rules = [
-            'jurusans_code' => 'required',
-            'jurusans' => 'required',
+        $validatedData = $request->validate([
+            'jurusan_code' => 'required',
+            'jurusan' => 'required',
             'type' => 'required',
             'description' => 'required',
-        ];
-
-        $validatedData = $request->validate($rules);
-
+        ]);
+    
         $jurusan->update($validatedData);
         return redirect('/jurusans')->with('success', 'Jurusan berhasil diubah');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Jurusan $jurusan)
     {
-        Jurusan::destroy($jurusan['id']);
+        $jurusan->delete();
         return redirect('/jurusans')->with('success', 'Jurusan berhasil dihapus');
     }
-}
+}    

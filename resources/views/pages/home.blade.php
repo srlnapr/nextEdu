@@ -235,12 +235,12 @@
     </div>
 </section>
 {{-- Section 1: Hal yang didapatkan --}}
-<section class="pt-16">
+<section id="fitur" class="pt-16 pb-20 lg:pt-24 lg:pb-28 bg-backgroundLight h-[600px] max-w-screen overflow-hidden">
     <div class="container mx-auto px-4">
         <div class="grid lg:grid-cols-2 gap-8 items-center">
             <div class="space-y-6">
                 <div class="max-w-xl">
-                    <h2 class="text-3xl font-bold mb-4">Hal yang <span class="text-indigo-600">didapatkan</span></h2>
+                    <h2 class="text-5xl font-bold mb-4">Hal yang <span class="text-indigo-600 text-purpleMain" >didapatkan</span></h2>
                     <p class="text-gray-600 mb-8">
                         Kamu akan mendapatkan beberapa hal yang bermanfaat untuk jenjangmu kedepan
                     </p>
@@ -292,13 +292,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="relative">
-                <div class="relative rounded-lg overflow-hidden border-4 border-indigo-600">
-                    <img src="{{ asset('assets/img/video-preview.jpg') }}" alt="Video Preview" class="w-full h-auto">
-                </div>
-                <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-600 rounded-lg"></div>
+                <img src="{{ asset('assets/fitur.png') }}" alt="Video Preview" class="w-full h-auto">
             </div>
+            >
         </div>
     </div>
 </section>

@@ -17,7 +17,15 @@ class SaranPekerjaanController extends Controller
      */
     public function index()
     {
-        //
+        $saranPekerjaanList = SaranPekerjaan::orderBy('jurusan_id', 'asc')->paginate(10);
+
+        return view('components.admin.saranpekerjaans.view', [
+            'saranPekerjaanList' => $saranPekerjaanList,
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
+        ]);
     }
 
     /**
@@ -25,16 +33,11 @@ class SaranPekerjaanController extends Controller
      */
     public function create()
     {
-        $jurusansInfo = Jurusan::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $artikelsInfo = Artikel::all();
-        $usersInfo = User::all();
-
         return view('components.admin.saranpekerjaans.add', [
-            'jurusansInfo' => $jurusansInfo,
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'artikelsInfo' => $artikelsInfo,
-            'usersInfo' => $usersInfo
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
         ]);
     }
 
@@ -44,38 +47,36 @@ class SaranPekerjaanController extends Controller
     public function store(StoreSaranPekerjaanRequest $request)
     {
         $validatedData = $request->validate([
-            'jurusan_id' => 'required',
-            'saranpekerjaan' => 'required'
+            'jurusan_id' => 'required|exists:jurusan,id',
+            'saranpekerjaan' => 'required|string|max:255'
         ]);
 
         SaranPekerjaan::create($validatedData);
-        return redirect('/jurusan')->with('success', 'Saran Pekerjaan berhasil ditambahkan');
+        return redirect('/saranpekerjaan')->with('success', 'Saran Pekerjaan berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(SaranPekerjaan $saranpekerjaan)
+    public function show(SaranPekerjaan $saranPekerjaan)
     {
-        //
+        return view('pages.saranPekerjaanDetail', [
+            'saranPekerjaan' => $saranPekerjaan,
+            'jurusan' => $saranPekerjaan->jurusan
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SaranPekerjaan $saranpekerjaan)
+    public function edit(SaranPekerjaan $saranPekerjaan)
     {
-        $jurusansInfo = Jurusan::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $artikelsInfo = Artikel::all();
-        $usersInfo = User::all();
-
         return view('components.admin.saranpekerjaans.edit', [
-            'saranpekerjaan' => $saranpekerjaan,
-            'jurusansInfo' => $jurusansInfo,
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'artikelsInfo' => $artikelsInfo,
-            'usersInfo' => $usersInfo
+            'saranPekerjaan' => $saranPekerjaan,
+            'jurusanInfo' => Jurusan::all(),
+            'pertanyaanInfo' => Pertanyaan::all(),
+            'artikelInfo' => Artikel::all(),
+            'userInfo' => User::all()
         ]);
     }
 
@@ -84,23 +85,21 @@ class SaranPekerjaanController extends Controller
      */
     public function update(UpdateSaranPekerjaanRequest $request, SaranPekerjaan $saranPekerjaan)
     {
-        $rules = [
-            'jurusan_id' => 'required',
-            'saranpekerjaan' => 'required',
-        ];
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validate([
+            'jurusan_id' => 'required|exists:jurusan,id',
+            'saranpekerjaan' => 'required|string|max:255',
+        ]);
 
         $saranPekerjaan->update($validatedData);
-        return redirect('/jurusans')->with('success', 'Saran Pekerjaan berhasil diubah');
+        return redirect('/saranpekerjaan')->with('success', 'Saran Pekerjaan berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SaranPekerjaan $saranpekerjaan)
+    public function destroy(SaranPekerjaan $saranPekerjaan)
     {
-        SaranPekerjaan::destroy($saranpekerjaan['id']);
-        return redirect('/jurusans')->with('success', 'Saran Pekerjaan berhasil dihapus');
+        $saranPekerjaan->delete();
+        return redirect('/saranpekerjaan')->with('success', 'Saran Pekerjaan berhasil dihapus');
     }
 }

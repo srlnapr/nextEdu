@@ -13,7 +13,7 @@
             <a href="/jurusans">Back</a>
           </button>
         </div>
-        <form class="mt-5" method="post" action="/jurusans/{{ $disease['id'] }}">
+        <form class="mt-5" method="post" action="/jurusans/{{ $jurusan['id'] }}">
           @method('put')
           @csrf
           <div class="w-full lg:mx-auto">
@@ -21,20 +21,20 @@
               <label for="jurusans_code" class="text-base font-bold text-primary lg:text-xl">
                 Diseases Code
               </label>
-              <input type="text" id="jurusans_code" name="jurusans_code"
-                value="{{ @old('jurusans_code', $disease['jurusans_code']) }}"
-                class="@error('jurusans_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('jurusans_code')
+              <input type="text" id="jurusan_code" name="jurusan_code"
+                value="{{ @old('jurusan_code', $jurusan['jurusan_code']) }}"
+                class="@error('jurusan_code') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
+              @error('jurusan_code')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
             <div class="mb-4 w-full px-4">
-              <label for="jurusans" class="text-base font-bold text-primary lg:text-xl">
+              <label for="jurusan" class="text-base font-bold text-primary lg:text-xl">
                 Jurusans
               </label>
-              <input type="text" id="jurusans " name="jurusans" value="{{ @old('jurusans', $disease['jurusans']) }}"
+              <input type="text" id="jurusan " name="jurusan" value="{{ @old('jurusan', $jurusan['jurusan']) }}"
                 class="@error('jurusans') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
-              @error('jurusans')
+              @error('jurusan')
                 <p class="mt-2 text-red-500">{{ $message }}</p>
               @enderror
             </div>
@@ -42,7 +42,7 @@
               <label for="type" class="text-base font-bold text-primary lg:text-xl">
                 Type
               </label>
-              <input type="text" id="type " name="type" value="{{ @old('type', $disease['type']) }}"
+              <input type="text" id="type " name="type" value="{{ @old('type', $jurusan['type']) }}"
                 class="@error('type') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500" />
               @error('type')
                 <p class="mt-2 text-red-500">{{ $message }}</p>

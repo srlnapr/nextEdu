@@ -20,7 +20,7 @@
           <div class="w-full lg:mx-auto">
             <div class="mb-4 w-full px-4">
               <label for="jurusan_id" class="text-base font-bold text-primary lg:text-xl">
-                Jurusans
+                Jurusan
               </label>
               <select name="jurusan_id" id="jurusan_id"
                 class="@error('jurusan_id') border-red-500 @else border-[#BBBBBB] @enderror w-full rounded-sm border bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500">

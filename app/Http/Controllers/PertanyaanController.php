@@ -21,7 +21,7 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        $pertanyaans = Pertanyaan::orderBy('pertanyaans_code');
+        $pertanyaans = Pertanyaan::orderBy('pertanyaan_code');
         $pertanyaansInfo = Pertanyaan::all();
         $namajurusansInfo = Jurusan::all();
         $artikelsInfo = Artikel::all();
@@ -64,7 +64,7 @@ class PertanyaanController extends Controller
     public function store(StorePertanyaanRequest $request)
     {
         $validatedData = $request->validate([
-            'pertanyaans_code' => 'required',
+            'pertanyaan_code' => 'required',
             'pertanyaans' => 'required',
         ]);
 
@@ -105,7 +105,7 @@ class PertanyaanController extends Controller
     public function update(UpdatePertanyaanRequest $request, Pertanyaan $pertanyaan)
     {
         $rules = [
-            'pertanyaans_code' => 'required',
+            'pertanyaan_code' => 'required',
             'pertanyaans' => 'required',
         ];
 

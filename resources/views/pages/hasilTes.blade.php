@@ -40,7 +40,7 @@
             <div class="grid w-full grid-cols-2 gap-1 self-center px-4">
                 <div class="rounded-[4px] border border-sky-500 bg-sky-200 px-3 py-5 text-center">
                     <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                        {{ count($pertanyaanInfo ?? []) }}
+                        {{ count($pertanyaanList ?? []) }}
                     </h1>
                     <p class="font-base text-base text-primary lg:text-xl">
                         Questions
@@ -57,5 +57,159 @@
             </div>
         </div>
     </div>
+         </div>
+      <div class="w-full self-center px-4">
+        <h1 class="text-2xl font-bold text-primary lg:text-3xl">
+        </h1>
+        <div class="mt-8">
+          <div class="w-full lg:mx-auto">
+            <div class="mb-10 w-full">
+              <div class="w-full rounded-sm border border-[#BBBBBB] bg-white p-3">
+                <div class="flex items-center justify-between">
+                  <h1 class="font-base mx-3 mt-3 mb-5 text-lg text-slate-800 lg:text-2xl">Questions</h1>
+                  <div class="w-full self-center">
+                    <a href="/"
+                      class="mx-3 rounded-sm border-2 border-black bg-black py-3 px-5 text-white duration-300 ease-out hover:bg-white hover:text-black">
+                      Back to Home
+                    </a>
+                  </div>
+                </div>
+                <form class="mt-5" method="post" action="/diagnose">
+                  @if ($pertanyaanList->count())
+                    <table class="mt-3 mb-3 w-full rounded-xl border text-slate-800">
+                      <thead class="text-slate-700">
+                        <tr>
+                          <th class="border bg-slate-50 px-6 py-3">
+                            No
+                          </th>
+                          <th class="border bg-slate-50 px-6 py-3">
+                            Questions
+                          </th>
+                          <th class="border bg-slate-50 px-6 py-3">
+                            Answer
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{ count($pertanyaanList ?? []) }}
+
+                        @for ($i = 0; $i < count($pertanyaanList ?? []); $i++)
+                        <tr class="px-6 py-3 text-center">
+                            {{-- <td class="border px-6 py-2">{{ $loop->iteration }}</td> --}}
+                            <td class="border px-6 py-2">{{ $i + 1 }}</td>
+                            <td class="content-start border px-6 py-2 text-justify">{{ $pertanyaanList[$i]['pertanyaan'] }}</td>
+                            <td class="border px-6 py-2">
+                              <select name="options" id="options-{{ $pertanyaanList[$i]['id'] }}" class="w-full rounded-md"
+                                onchange="storeAnswers(this, {{ $pertanyaanList[$i]['id'] }})">
+                                <option hidden disabled selected value> -- Select an Option -- </option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                              </select>
+                              {{-- <p class="text-red-500 text-justify">Select an Option</p> --}}
+                            </td>
+                          </tr>
+                        @endfor
+                      </tbody>
+                    @else
+                      <h1 class="mt-2 mb-4 border p-3 text-center text-lg font-light text-primary lg:text-2xl">There is no
+                        pertanyaan.
+                      </h1>
+                  @endif
+                  </table>
+                  <button type="button" id="submitButton"
+                    class="w-full rounded-sm border-2 border-black bg-black py-3 px-8 text-white duration-300 ease-out hover:bg-white hover:text-black focus:outline-none focus:ring focus:ring-blue-500">
+                    Submit Answer
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script>
+    const submitButton = document.getElementById('submitButton');
+    const selects = document.getElementsByTagName('select');
+    const user = @json(auth()->user());
+    // console.log(user.id);
+    const pertanyaan = @json($pertanyaanList);
+    const pertanyaanCopy = pertanyaan.map((e) => {
+      return e;
+    });
+    const answers = [];
+
+    const storeAnswers = (e, pertanyaanId) => {
+      const value = e.value;
+
+      for (let i = 0; i < answers.length; i++) {
+        if (answers[i].pertanyaanId === pertanyaan) {
+          answers.splice(i, 1);
+        }
+      }
+      e.classList.remove('bg-red-100');
+      e.classList.remove('border-red-500');
+      e.classList.add('bg-blue-100');
+      e.classList.add('border-blue-500');
+
+      answers.push({
+        pertanyaanId,
+        value
+      });
+    }
+
+    submitButton.addEventListener('click', () => {
+
+      let indexFocus = -1;
+      answers.map((e) => {
+        indexFocus = pertanyaanCopy.findIndex((currentValue) => currentValue.id === e.pertanyaanId);
+        if (indexFocus !== -1) {
+          pertanyaanCopy.splice(indexFocus, 1);
+        }
+      })
+
+      for (let k = 0; k < pertanyaanCopy.length; k++) {
+        const notSelect = document.getElementById(`options-${pertanyaanCopy[k].id}`);
+        notSelect.classList.add('bg-red-100');
+        notSelect.classList.add('border-red-500');
+      }
+
+      // console.table(answers)
+      // console.table(pertanyaanCopy)
+
+
+      if (pertanyaanCopy.length === 0) {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
+        $.ajax({
+          type: "POST",
+          url: `/submit-answer/${user.id}`,
+          dataType: "json",
+          data: {
+            'data': answers
+          },
+          success: (response, status) => {
+            console.log(response, status);
+            if (response.status === 200) {
+              window.location.replace("/dashboard") 
+            } else {
+              alert("Gagal");
+            }
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
+      }
+    });
+  </script>
 </section>
+
 @endsection

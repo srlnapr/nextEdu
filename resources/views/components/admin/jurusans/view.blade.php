@@ -11,7 +11,7 @@
     <div class="mb-10 w-full">
       <div class="w-full rounded-sm border border-[#BBBBBB] bg-white p-3">
         <div class="flex items-center justify-between px-4">
-          <h1 class="font-base mx-3 mt-3 mb-5 text-lg text-slate-800 lg:text-2xl">Jurusans Table</h1>
+          <h1 class="font-base mx-3 mt-3 mb-5 text-lg text-slate-800 lg:text-2xl">Jurusan Table</h1>
           <form action="/jurusans" method="get">
             <div class="w-full self-center">
               <div class="flex">
@@ -25,7 +25,7 @@
             </div>
           </form>
         </div>
-        @if ($jurusans->count())
+        @if ($jurusanList->count())
           <table class="mb-3 w-full rounded-xl text-slate-800">
             <thead class="text-slate-700">
               <tr>
@@ -33,10 +33,10 @@
                   No
                 </th>
                 <th class="border bg-slate-50 px-6 py-3">
-                  Jurusans Code
+                  Jurusan Code
                 </th>
                 <th class="border bg-slate-50 px-6 py-3">
-                  Jurursans
+                  Jurursan
                 </th>
                 <th class="border bg-slate-50 px-6 py-3">
                   Action
@@ -44,11 +44,11 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($jurusans as $jurusan)
+              @foreach ($jurusanList as $jurusan)
                 <tr class="px-6 py-3 text-center">
                   <td class="border px-6 py-2">{{ $loop->iteration }}</td>
-                  <td class="border px-6 py-2">{{ $jurusan['jurusans_code'] }}</td>
-                  <td class="border px-6 py-2 text-justify">{{ $jurusan['jurusans'] }}</td>
+                  <td class="border px-6 py-2">{{ $jurusan['jurusan_code'] }}</td>
+                  <td class="border px-6 py-2 text-justify">{{ $jurusan['jurusan'] }}</td>
                   <td class="flex justify-center border px-6 py-2">
                     <a class="mx-2 text-blue-400" href="/jurusans/{{ $jurusan['id'] }}">
                       View
@@ -73,10 +73,13 @@
             </h1>
         @endif
         </table>
-        {{ $jurusans->links() }}
+        {{ $jurusanList->links() }}
       </div>
     </div>
   </div>
+
+
+
 
   {{-- solutions --}}
   <button
@@ -101,7 +104,7 @@
             </div>
           </form>
         </div>
-        @if ($saranpekerjaans->count())
+        @if ($saranPekerjaanList->count())
           <table class="mb-3 w-full rounded-xl text-slate-800">
             <thead class="text-slate-700">
               <tr>
@@ -150,7 +153,7 @@
             </h1>
         @endif
         </table>
-        {{ $jurusans->links() }}
+        {{ $jurusanList->links() }}
       </div>
     </div>
   </div>
