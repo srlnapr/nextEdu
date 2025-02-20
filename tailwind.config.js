@@ -15,11 +15,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#030723",
-        secondary: "#3b82f6",
+        primary: '#4338CA',
+                secondary: '#6366F1',
         backgroundLight: "#FEFCFB",
         backgroundPrimary: "#FFFFFF",
         purpleMain: "#493D9E"
+        
        },
       screens: {
         "2xl": "1320px",

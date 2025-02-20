@@ -1,214 +1,159 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="pt-28 pb-24 lg:pt-36">
+<section class="pt-28 pb-24 lg:pt-36 bg-white min-h-screen">
     <div class="container">
-        <div class="flex flex-col lg:flex-row">
-            <div class="w-full self-center px-4">
-                <h1 class="text-base font-medium text-primary md:text-xl">
-                    Welcome to
-                    <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">
-                        Next<span class="text-primary">Edu</span>.
-                    </p>
-                </h1>
-                <h2 class="mb-3 mt-2 text-lg font-light text-primary lg:text-2xl">
-                    Diagnose. <span class="font-bold capitalize">
-                        @if (auth()->user())
-                            {{ auth()->user()->name }}
-                        @else
-                            Guest
-                        @endif
-                    </span>
-                </h2>
-                @if (auth()->user() == null)
-                    <p class="mb-3 max-w-md text-slate-500">
-                        To get <span class="font-bold text-primary">Dashboard</span> feature you have to 
-                        <a href="/login" class="font-bold text-secondary">Login.</a>
-                    </p>
-                @elseif (auth()->user() !== null && auth()->user()->is_admin == 1)
-                    <p class="mb-3 max-w-md text-slate-500">
-                        Go to <a href="/dashboard" class="font-bold capitalize text-secondary">dashboard</a>..
-                    </p>
-                @elseif (auth()->user() !== null)
-                    <p class="mb-3 max-w-md text-slate-500">
-                        Go to <a href="/dashboard" class="font-bold capitalize text-secondary">
-                            {{ auth()->user()->name }}'s dashboard</a>.
-                    </p>
-                @endif
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-primary">Tes Minatmu Sekarang!</h1>
+            <p class="text-gray-600">Tes ini di supervisi oleh data Psikolog</p>
+        </div>
+
+        <div class="mt-6 bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-700">Jawablah yang sesuai dengan dirimu!</h2>
+
+            <div class="mt-4">
+                <span>Progres</span>
+                <div class="w-full bg-gray-300 h-4 rounded-lg overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-purple-500" style="width: 0%;"></div>
+                </div>
             </div>
 
-            <div class="grid w-full grid-cols-2 gap-1 self-center px-4">
-                <div class="rounded-[4px] border border-sky-500 bg-sky-200 px-3 py-5 text-center">
-                    <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                        {{ count($pertanyaanList ?? []) }}
-                    </h1>
-                    <p class="font-base text-base text-primary lg:text-xl">
-                        Questions
-                    </p>
-                </div>
-                <div class="rounded-[4px] border border-green-500 bg-green-200 p-3 py-5 text-center">
-                    <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                        {{ count($jurusanInfo ?? []) }}
-                    </h1>
-                    <p class="font-base text-base text-primary lg:text-xl">
-                        Possible Results
-                    </p>
-                </div>
-            </div>
+            <form id="quiz-form" class="mt-5">
+              @foreach($pertanyaanList as $index => $pertanyaan)
+              <div class="mt-4 p-3 border rounded-md question-block" data-id="{{ $pertanyaan['id'] }}">
+                  <p class="text-gray-700">{{ $index + 1 }}. {{ $pertanyaan['pertanyaan'] }}</p>
+                  <div class="flex gap-4 mt-2">
+                      <button type="button" class="answer-btn px-4 py-2 border rounded-md" data-value="0">Tidak</button>
+                      <button type="button" class="answer-btn px-4 py-2 border rounded-md" data-value="1">Ya</button>
+                  </div>
+              </div>
+              @endforeach
+              <button type="button" id="submitButton" class="mt-6 px-6 py-3 bg-black text-white rounded-md">Selanjutnya</button>
+          </form>
         </div>
     </div>
-         </div>
-      <div class="w-full self-center px-4">
-        <h1 class="text-2xl font-bold text-primary lg:text-3xl">
-        </h1>
-        <div class="mt-8">
-          <div class="w-full lg:mx-auto">
-            <div class="mb-10 w-full">
-              <div class="w-full rounded-sm border border-[#BBBBBB] bg-white p-3">
-                <div class="flex items-center justify-between">
-                  <h1 class="font-base mx-3 mt-3 mb-5 text-lg text-slate-800 lg:text-2xl">Questions</h1>
-                  <div class="w-full self-center">
-                    <a href="/"
-                      class="mx-3 rounded-sm border-2 border-black bg-black py-3 px-5 text-white duration-300 ease-out hover:bg-white hover:text-black">
-                      Back to Home
-                    </a>
-                  </div>
-                </div>
-                <form class="mt-5" method="post" action="/diagnose">
-                  @if ($pertanyaanList->count())
-                    <table class="mt-3 mb-3 w-full rounded-xl border text-slate-800">
-                      <thead class="text-slate-700">
-                        <tr>
-                          <th class="border bg-slate-50 px-6 py-3">
-                            No
-                          </th>
-                          <th class="border bg-slate-50 px-6 py-3">
-                            Questions
-                          </th>
-                          <th class="border bg-slate-50 px-6 py-3">
-                            Answer
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{ count($pertanyaanList ?? []) }}
+</section>
 
-                        @for ($i = 0; $i < count($pertanyaanList ?? []); $i++)
-                        <tr class="px-6 py-3 text-center">
-                            {{-- <td class="border px-6 py-2">{{ $loop->iteration }}</td> --}}
-                            <td class="border px-6 py-2">{{ $i + 1 }}</td>
-                            <td class="content-start border px-6 py-2 text-justify">{{ $pertanyaanList[$i]['pertanyaan'] }}</td>
-                            <td class="border px-6 py-2">
-                              <select name="options" id="options-{{ $pertanyaanList[$i]['id'] }}" class="w-full rounded-md"
-                                onchange="storeAnswers(this, {{ $pertanyaanList[$i]['id'] }})">
-                                <option hidden disabled selected value> -- Select an Option -- </option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                              </select>
-                              {{-- <p class="text-red-500 text-justify">Select an Option</p> --}}
-                            </td>
-                          </tr>
-                        @endfor
-                      </tbody>
-                    @else
-                      <h1 class="mt-2 mb-4 border p-3 text-center text-lg font-light text-primary lg:text-2xl">There is no
-                        pertanyaan.
-                      </h1>
-                  @endif
-                  </table>
-                  <button type="button" id="submitButton"
-                    class="w-full rounded-sm border-2 border-black bg-black py-3 px-8 text-white duration-300 ease-out hover:bg-white hover:text-black focus:outline-none focus:ring focus:ring-blue-500">
-                    Submit Answer
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.answer-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const totalQuestions = {{ count($pertanyaanList) }};
+        let answeredQuestions = 0;
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (!this.parentNode.dataset.answered) {
+                    answeredQuestions++;
+                    this.parentNode.dataset.answered = true;
+                    updateProgress();
+                }
+                this.parentNode.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('bg-purple-500', 'text-white'));
+                this.classList.add('bg-purple-500', 'text-white');
+            });
+        });
+
+        function updateProgress() {
+            const percentage = (answeredQuestions / totalQuestions) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
+    });
+</script>
+
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.answer-btn');
+    const progressBar = document.getElementById('progress-bar');
     const submitButton = document.getElementById('submitButton');
-    const selects = document.getElementsByTagName('select');
+    const totalQuestions = document.querySelectorAll('.question-block').length;
     const user = @json(auth()->user());
-    // console.log(user.id);
-    const pertanyaan = @json($pertanyaanList);
-    const pertanyaanCopy = pertanyaan.map((e) => {
-      return e;
+    let answeredQuestions = 0;
+    let answers = [];
+
+    // Handle answer button clicks
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const questionBlock = this.closest('.question-block');
+            const questionId = questionBlock.dataset.id;
+            const value = this.dataset.value;
+
+            // Remove previous answer from array if exists
+            answers = answers.filter(answer => answer.pertanyaanId !== questionId);
+
+            // Add new answer
+            answers.push({
+                pertanyaanId: questionId,
+                value: value
+            });
+
+            // Update button styles
+            questionBlock.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-500', 'text-white');
+            });
+            this.classList.add('bg-purple-500', 'text-white');
+
+            // Update progress if not already counted
+            if (!questionBlock.dataset.answered) {
+                answeredQuestions++;
+                questionBlock.dataset.answered = true;
+                updateProgress();
+            }
+        });
     });
-    const answers = [];
 
-    const storeAnswers = (e, pertanyaanId) => {
-      const value = e.value;
-
-      for (let i = 0; i < answers.length; i++) {
-        if (answers[i].pertanyaanId === pertanyaan) {
-          answers.splice(i, 1);
-        }
-      }
-      e.classList.remove('bg-red-100');
-      e.classList.remove('border-red-500');
-      e.classList.add('bg-blue-100');
-      e.classList.add('border-blue-500');
-
-      answers.push({
-        pertanyaanId,
-        value
-      });
+    function updateProgress() {
+        const percentage = (answeredQuestions / totalQuestions) * 100;
+        progressBar.style.width = `${percentage}%`;
     }
 
+    // Handle form submission
     submitButton.addEventListener('click', () => {
-
-      let indexFocus = -1;
-      answers.map((e) => {
-        indexFocus = pertanyaanCopy.findIndex((currentValue) => currentValue.id === e.pertanyaanId);
-        if (indexFocus !== -1) {
-          pertanyaanCopy.splice(indexFocus, 1);
+        // Check if all questions are answered
+        if (answers.length < totalQuestions) {
+            // Highlight unanswered questions
+            document.querySelectorAll('.question-block').forEach(block => {
+                const questionId = block.dataset.id;
+                if (!answers.find(a => a.pertanyaanId === questionId)) {
+                    block.classList.add('border-red-500', 'bg-red-50');
+                }
+            });
+            alert('Mohon jawab semua pertanyaan terlebih dahulu!');
+            return;
         }
-      })
 
-      for (let k = 0; k < pertanyaanCopy.length; k++) {
-        const notSelect = document.getElementById(`options-${pertanyaanCopy[k].id}`);
-        notSelect.classList.add('bg-red-100');
-        notSelect.classList.add('border-red-500');
-      }
-
-      // console.table(answers)
-      // console.table(pertanyaanCopy)
-
-
-      if (pertanyaanCopy.length === 0) {
+        // Submit answers
         $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
 
         $.ajax({
-          type: "POST",
-          url: `/submit-answer/${user.id}`,
-          dataType: "json",
-          data: {
-            'data': answers
-          },
-          success: (response, status) => {
-            console.log(response, status);
-            if (response.status === 200) {
-              window.location.replace("/dashboard") 
-            } else {
-              alert("Gagal");
+            type: "POST",
+            url: `/submit-answer/${user.id}`,
+            dataType: "json",
+            data: {
+                'data': answers
+            },
+            success: (response) => {
+                if (response.status === 200) {
+                    window.location.replace("/dashboard");
+                } else {
+                    alert("Gagal mengirim jawaban");
+                }
+            },
+            error: (error) => {
+                console.error('Error:', error);
+                alert("Terjadi kesalahan saat mengirim jawaban");
             }
-          },
-          error: (response) => {
-            console.log(response);
-          }
         });
-      }
     });
+});
   </script>
 </section>
 

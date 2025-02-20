@@ -2,132 +2,76 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  @vite('resources/css/app.css')
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @vite('resources/css/app.css')
 
-  <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-  <title>nextEdu</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
+    <title>nextEdu</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 </head>
 
-<body>
-  @include('components.navbar')
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-1/5 bg-purple-700 text-white shadow-lg px-6 py-8 rounded-r-3xl flex flex-col items-center">
+            <!-- Logo -->
+            <div class="mb-6">
+                <img src="{{ asset('images/logo.png') }}" alt="nextEdu Logo" class="w-32 h-auto">
+            </div>
 
-  @if (session()->has('success'))
-    <div
-      class="sticky left-1/2 top-20 z-20 flex min-h-[50px] w-[300px] -translate-x-1/2 justify-between gap-x-4 bg-secondary px-5 pt-3.5 pb-4 text-white">
-      <p>{{ session('success') }}</p>
-      <button class="h-fit hover:text-white/75" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">
-        X
-      </button>
-    </div>
-  @elseif(session()->has('error'))
-    <div
-      class="sticky left-1/2 top-20 z-20 flex min-h-[50px] w-[300px] -translate-x-1/2 justify-between gap-x-4 bg-red-500 px-5 pt-3.5 pb-4 text-white">
-      <p>{{ session('error') }}</p>
-      <button class="h-fit hover:text-white/75" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">
-        X
-      </button>
-    </div>
-  @endif
-
-  <main>
-    <section class="pt-28 pb-16 lg:pt-36">
-      <div class="container">
-        <div class="flex flex-col lg:flex-row">
-          <div class="w-full self-center px-4">
-            <h1 class="text-base font-medium text-primary md:text-xl">
-              Welcome to
-              <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Next<span class="text-primary">Edu</span>.
-              </p>
-            </h1>
-            <h2 class="mb-3 mt-2 text-lg font-light text-primary lg:text-2xl">Dashboard. <span class="font-bold">Admin</span>
+            <h2 class="text-2xl font-bold flex items-center">
+                <span class="text-white">next</span><span class="text-yellow-300">Edu</span>
             </h2>
-          </div>
 
-          <div class="grid w-full grid-cols-4 gap-1 self-center px-4">
-            <div class="rounded-[4px] border border-sky-500 bg-sky-200 p-3 text-center">
-              <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($pertanyaansInfo ?? []) }}
-              </h1>
-              <p class="font-base text-base text-primary lg:text-xl">
-                Pertanyaan
-              </p>
-            </div>
-            <div class="rounded-[4px] border border-pink-500 bg-pink-200 p-3 text-center">
-              <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($jurusansInfo ?? []) - 1 }}
-              </h1>
-              <p class="font-base text-base text-primary lg:text-xl">
-                Jurusan
-              </p>
-            </div>
-            <div class="rounded-[4px] border border-green-500 bg-green-200 p-3 text-center">
-              <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($artikelsInfo ?? []) }}
-              </h1>
-              <p class="font-base text-base text-primary lg:text-xl">
-                Artikel
-              </p>
-            </div>
-            <div class="rounded-[4px] border border-indigo-500 bg-indigo-200 p-3 text-center">
-              <h1 class="text-4xl font-bold text-primary lg:text-5xl">
-                {{ count($usersInfo ?? []) }}
-              </h1>
-              <p class="font-base text-base text-primary lg:text-xl">
-                Pengguna
-              </p>
-            </div>
-          </div>
-        </div>
+            <nav class="mt-6 w-full">
+                <a href="/adminDashboard" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Dashboard</a>
+                <a href="/pertanyaans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Pertanyaan</a>
+                <a href="/artikels" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Artikel</a>
+                <a href="/rules" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Rules</a>
+                <a href="/users" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings User</a>
+            </nav>
+        </aside>
 
-        <div class="w-full self-center px-4">
-          <h1 class="text-2xl font-bold text-primary lg:text-3xl"></h1>
-          <div class="mt-8">
-            <div
-              class="bayangan_field mx-auto mb-8 grid grid-cols-5 divide-x-2 border-2 border-primary bg-white p-3 py-4">
-              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/pertanyaans">
-                  Pertanyaan
-                </a>
-              </div>
-              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/jurusans">
-                  Jurusan
-                </a>
-              </div>
-              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/artikels">
-                  Artikel
-                </a>
-              </div>
-              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/rules">
-                  Rule Base
-                </a>
-              </div>
-              <div class="font-base flex items-center justify-center font-bold text-lg text-secondary hover:text-primary md:text-xl">
-                <a href="/users">
-                  Users
-                </a>
-              </div>
+        <!-- Konten Utama -->
+        <main class="w-4/5 p-8">
+            <!-- Kotak putih sebagai container utama -->
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-3xl font-bold text-gray-800">Overview</h1>
+                    <input type="text" placeholder="Search" class="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-purple-400">
+                </div>
+
+                <section class="grid grid-cols-4 gap-4">
+                    <div class="bg-white p-6 rounded-md shadow-md text-center">
+                        <h2 class="text-4xl font-bold text-purple-700">{{ count($pertanyaansInfo ?? []) }}</h2>
+                        <p class="text-lg text-gray-600">Jumlah Pertanyaan</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-md shadow-md text-center">
+                        <h2 class="text-4xl font-bold text-purple-700">{{ count($jurusansInfo ?? []) - 1 }}</h2>
+                        <p class="text-lg text-gray-600">Total List Jurusan</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-md shadow-md text-center">
+                        <h2 class="text-4xl font-bold text-purple-700">{{ count($artikelsInfo ?? []) }}</h2>
+                        <p class="text-lg text-gray-600">Total Artikel Masuk</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-md shadow-md text-center">
+                        <h2 class="text-4xl font-bold text-purple-700">{{ count($usersInfo ?? []) }}</h2>
+                        <p class="text-lg text-gray-600">New Customer</p>
+                    </div>
+                </section>
+
+                <div class="mt-8">
+                    @yield('content')
+                </div>
             </div>
+        </main>
+    </div>
 
-            @yield('content')
-
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  @include('components.footer')
-  <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
-
 </html>
