@@ -1,36 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="pt-28 pb-24 lg:pt-36 bg-white min-h-screen">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="text-3xl font-bold text-primary">Tes Minatmu Sekarang!</h1>
-            <p class="text-gray-600">Tes ini di supervisi oleh data Psikolog</p>
+<section class="pt-14 pb-12 lg:pt-24 bg-white min-h-screen">
+    <div class="relative h-screen bg-cover bg-top flex flex-col justify-center items-center"
+        style="background-image: url('{{ asset('assets/bannerTes.png') }}');">
+        <h1 class="text-3xl font-bold text-primary" style="color: white; position: absolute; top: 20px; right: 20px;">Tes Minatmu Sekarang!</h1>
+        <p class="text-gray-600" style="color: white; position: absolute; top: 60px; right: 20px;">Tes ini di supervisi oleh data Psikolog</p>
         </div>
-
-        <div class="mt-6 bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-xl font-semibold text-gray-700">Jawablah yang sesuai dengan dirimu!</h2>
-
-            <div class="mt-4">
-                <span>Progres</span>
-                <div class="w-full bg-gray-300 h-4 rounded-lg overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-purple-500" style="width: 0%;"></div>
+    </div>
+ 
+ 
+    <div class="mt-6 bg-white shadow-lg rounded-lg p-6">
+        <div style="text-align: center;">
+            <h2 class="text-xl font-bold text-gray-700" style="font-size: 2rem;">Jawablah yang sesuai dengan dirimu!</h2>
+          </div>
+          <div class="mt-4 flex items-center">
+            <span>Progres</span>
+            <div class="w-full bg-gray-300 h-4 rounded-lg overflow-hidden ml-2">
+              <div id="progress-bar" class="h-full bg-purpleMain" style="width: 0%;"></div>
+            </div>
+          </div>
+          
+          <form id="quiz-form" class="mt-5 text-center">
+            @foreach($pertanyaanList as $index => $pertanyaan)
+            <div class="mt-8" data-id="{{ $pertanyaan['id'] }}">
+                <!-- Bungkus teks pertanyaan dengan inline-block agar sejajar kiri -->
+                <p class="text-black font-medium text-left mx-auto pl-20" style="max-width: 600px;">{{ $index + 1 }}. {{ $pertanyaan['pertanyaan'] }}</p>
+            
+                <!-- Tombol dibuat sejajar dan ukuran sama -->
+                <div class="flex justify-center gap-4 mt-4">
+                    <button type="button" class="answer-btn w-24 px-6 py-2 rounded-md border border-purpleMain font-medium" data-value="0">Tidak</button>
+                    <button type="button" class="answer-btn w-24 px-6 py-2 rounded-md border border-purpleMain font-medium" data-value="1">Ya</button>
                 </div>
             </div>
-
-            <form id="quiz-form" class="mt-5">
-              @foreach($pertanyaanList as $index => $pertanyaan)
-              <div class="mt-4 p-3 border rounded-md question-block" data-id="{{ $pertanyaan['id'] }}">
-                  <p class="text-gray-700">{{ $index + 1 }}. {{ $pertanyaan['pertanyaan'] }}</p>
-                  <div class="flex gap-4 mt-2">
-                      <button type="button" class="answer-btn px-4 py-2 border rounded-md" data-value="0">Tidak</button>
-                      <button type="button" class="answer-btn px-4 py-2 border rounded-md" data-value="1">Ya</button>
-                  </div>
-              </div>
-              @endforeach
-              <button type="button" id="submitButton" class="mt-6 px-6 py-3 bg-black text-white rounded-md">Selanjutnya</button>
-          </form>
-        </div>
+            @endforeach
+            
+            <!-- Tombol Selanjutnya -->
+            <div class="flex justify-center mt-8">
+                <button type="button" id="submitButton" class="px-8 py-3 bg-purple-500 hover:bg-purple-700 text-white rounded-md font-medium w-full max-w-xs">Selanjutnya</button>
+            </div>
+        </form>
+        
+    </div>
     </div>
 </section>
 
@@ -62,11 +73,11 @@
 
 
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.answer-btn');
     const progressBar = document.getElementById('progress-bar');
     const submitButton = document.getElementById('submitButton');
@@ -154,7 +165,7 @@
         });
     });
 });
-  </script>
+</script>
 </section>
 
 @endsection

@@ -6,11 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite('resources/css/app.css')
-
-    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-    <title>nextEdu</title>
-
-    <!-- Fonts -->
+ 
+    <link rel="icon" href="{{ asset(path: 'favicon.ico') }}" sizes="1024x1024" type="image/png">    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 </head>

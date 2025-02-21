@@ -10,11 +10,11 @@ body {
 }
 
 .btnn:hover {
-    box-shadow: 10px 8px #030723;
+    box-shadow: 10px 8px #feffff;
 }
 
 .btnnn:hover {
-    box-shadow: 4px 3px #030723;
+    box-shadow: 4px 3px #0e1970;
 }
 
 .bayangan {
@@ -126,4 +126,19 @@ body::-webkit-scrollbar-button {
     0% { transform: translateY(-10px); }
     50% { transform: translateY(-15px); }
     100% { transform: translateY(-10px); }
+}
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.float-animation {
+    animation: floating 3s ease-in-out infinite;
+    will-change: transform;
 }

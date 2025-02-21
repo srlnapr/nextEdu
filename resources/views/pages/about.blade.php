@@ -1,35 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-  <section class="pt-28 pb-24 lg:pt-36 lg:pb-32">
-    <div class="container">
-      <div class="flex flex-wrap">
-        <div class="w-full self-center px-4 lg:w-1/2">
-          <h1 class="text-base font-medium text-primary md:text-xl">
-            What is
-            <p class="mt-1 block text-4xl font-bold text-secondary lg:text-5xl">Next<span class="text-primary">Edu</span>?
-            </p>
-          </h1>
-          <h2 class="mb-5 mt-2 text-lg font-light text-primary lg:text-2xl">A place that provides all about Diabetes
-            Mellitus.</h2>
-          <p class="mb-5 max-w-md text-xl font-base">
-            <span class="text-primary">NextEdu</span> is a web-based <span 
-              class="text-secondary">diagnose application</span> to help people diagnose
-              diabetes mellitus disease.
-          </p>
-          <p class="mb-5 max-w-md text-xl font-base"> The results of this diagnosis are only based on rule base which created and arranged by <a class="text-secondary" target="blank" href="https://www.halodoc.com/tanya-dokter/dr-i-gusti-agung-indra-adi-kusuma-sp-pd"> Dr. I Gusti Agung Indra Adi Kusuma </a>.
-          </p>
+<div class="container mx-auto text-center py-20">
+    <h2 class="text-2xl font-semibold mb-4">Chatbot AI</h2>
+    
+    <div class="flex items-center">  <textarea id="prompt" class="border p-2 w-full max-w-lg"></textarea>
+      <button id="send" class="bg-purple-500 text-white px-4 py-2 mt-2 ml-2">Kirim</button>
+  </div>
+    <h3 class="mt-6 text-lg font-semibold">Jawaban:</h3>
+    <p id="response" class="border p-2 w-full max-w-lg"></p>
+</div>
 
-          <p class="mb-5 max-w-md text-xl font-light text-slate-500"> Click the expert's name above for more detail.</p>
-        </div>
-        <div
-          class="bayangan hidden w-full self-center rounded-sm border-2 border-primary bg-white px-4 md:block lg:w-1/2">
-          {{-- Lottie --}}
-          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-          <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_v1yudlrx.json" background="transparent"
-            speed="1" style="width: 550px; height: 350px;" loop autoplay class="mx-auto"></lottie-player>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+     document.getElementById('send').addEventListener('click', async function() {
+        const prompt = document.getElementById('prompt').value;
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        const response = await fetch('/generate', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ prompt }) 
+        });
+
+        const data = await response.json();
+        console.log("Respon dari API:", data); // Debugging
+
+        // Pastikan data sesuai format API
+        if (data.message) {
+            document.getElementById('response').innerText = data.message;
+        } else {
+            document.getElementById('response').innerText = 'Tidak ada respon dari AI.';
+        }
+    });
+</script>
 @endsection
