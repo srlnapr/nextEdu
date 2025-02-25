@@ -4,60 +4,60 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="pt-28 pb-24 lg:pt-36 lg:pb-32 bg-backgroundLight">
+
+<section id="Home" class="min-h-screen flex items-center bg-backgroundLight max-w-screen overflow-hidden">
     <div class="container">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap items-center">
             <div class="w-full self-center px-4 lg:w-1/2">
                 <div class="flex flex-wrap space-x-2">
-                    <h1 class="text-6xl font-bold text-gray-900 dark:text-white" data-aos="fade-up">Temukan</h1>
-                    <h1 id="typing-text" class="text-6xl font-bold text-purple-900" data-aos="fade-up"
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white" data-aos="fade-up">Temukan
+                    </h1>
+                    <h1 id="typing-text" class="text-5xl lg:text-6xl font-bold text-purpleMain" data-aos="fade-up"
                         data-aos-delay="100"></h1>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            const text = "Jurusanmu"; // Teks yang akan diketik
-                            const typingElement = document.getElementById("typing-text");
-                            let index = 0;
-                            let isDeleting = false;
-                    
-                            function typeText() {
-                                if (!isDeleting) {
-                                    // Ketik teks satu per satu
-                                    typingElement.innerHTML = text.substring(0, index);
-                                    index++;
-                    
-                                    // Jika sudah selesai, mulai hapus setelah jeda
-                                    if (index > text.length) {
-                                        isDeleting = true;
-                                        setTimeout(typeText, 1000); // Tunggu sebelum menghapus
-                                    } else {
-                                        setTimeout(typeText, 150); // Kecepatan mengetik
-                                    }
-                                } else {
-                                    // Hapus teks satu per satu
-                                    typingElement.innerHTML = text.substring(0, index);
-                                    index--;
-                    
-                                    // Jika sudah terhapus semua, mulai mengetik lagi
-                                    if (index === 0) {
-                                        isDeleting = false;
-                                    }
-                                    setTimeout(typeText, 100); // Kecepatan menghapus
-                                }
-                            }
-                    
-                            typeText(); // Mulai animasi mengetik
-                        });
-                    </script>
-                    <h1 class="text-6xl font-bold text-gray-900" data-aos="fade-up" data-aos-delay="200">Sekarang</h1>
                 </div>
+                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900" data-aos="fade-up" data-aos-delay="200">
+                    Sekarang</h1>
 
-                <p class="mt-6 mb-3 max-w-md text-slate-500" data-aos="fade-up" data-aos-delay="300">
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const text = "Jurusanmu"; 
+                        const typingElement = document.getElementById("typing-text");
+                        let index = 0;
+                        let isDeleting = false;
+
+                        function typeText() {
+                            if (!isDeleting) {
+                                typingElement.innerHTML = text.substring(0, index);
+                                index++;
+
+                                if (index > text.length) {
+                                    isDeleting = true;
+                                    setTimeout(typeText, 1000);
+                                } else {
+                                    setTimeout(typeText, 150);
+                                }
+                            } else {
+                                typingElement.innerHTML = text.substring(0, index);
+                                index--;
+
+                                if (index === 0) {
+                                    isDeleting = false;
+                                }
+                                setTimeout(typeText, 100);
+                            }
+                        }
+
+                        typeText();
+                    });
+                </script>
+
+                <p class="mt-4 mb-2 max-w-md text-slate-500" data-aos="fade-up" data-aos-delay="300">
                     Temukan informasi lengkap seputar jurusan yang sesuai dengan minat dan bakatmu.
                 </p>
 
-                <div class="mb-5 flex flex-col md:flex-row" data-aos="fade-up" data-aos-delay="400">
+                <div class="mb-3 flex flex-col md:flex-row" data-aos="fade-up" data-aos-delay="400">
                     <button type="button"
-                        class="flex items-center gap-2 text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+                        class="flex items-center gap-2 text-purpleSecondarry hover:text-white border border-purpleSecondarry hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mb-2">
                         Lihat potensimu
                         <svg class="rtl:rotate-180 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 10">
@@ -68,17 +68,44 @@
                 </div>
             </div>
 
-            <img src="/assets/element1.png" alt="element1" class="absolute top-12 left-1/2 transform -translate-x-1/2"
-                data-aos="fade-up" data-aos-delay="500" data-aos-duration="1200" data-aos-anchor-placement="top-bottom"
-                data-aos="zoom-in">
-
-            <div style="position: relative; text-align: right; margin-left: 80px; margin-right: 10px;">
-                <img src="/assets/gambar1.png" class="float-animation" alt="gambar1" width="500px" height="600px"
+            <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                <img src="/assets/gambar1.png" class="float-animation max-w-[400px] h-auto" alt="gambar1"
                     data-aos="zoom-in" data-aos-delay="600">
+            </div>
+        </div>
+
+        <!-- Feature Boxes -->
+        <div class="container mx-auto mt-8">
+            <div class="flex flex-wrap justify-center gap-3">
+                <div class="flex flex-wrap justify-center items-stretch gap-3 bg-white rounded-lg p-3 shadow-md">
+                    <div class="flex flex-col items-center p-2 min-w-[75px]" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Minat</h3>
+                        <p class="text-xxs text-gray-500 text-center">Hal yang kamu senangi</p>
+                    </div>
+
+                    <div class="flex flex-col items-center p-2 min-w-[75px]" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Bakat</h3>
+                        <p class="text-xxs text-gray-500 text-center">Skills yang kamu miliki</p>
+                    </div>
+
+                    <div class="flex flex-col items-center p-2 min-w-[75px]" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Hasil</h3>
+                        <p class="text-xxs text-gray-500 text-center">Lihat Hasilnya</p>
+                    </div>
+
+                    <div class="flex items-center">
+                        <button
+                            class="bg-purpleMain text-white font-bold px-6 py-3 rounded-lg  hover:bg-purple-700 transition-colors"
+                            data-aos="fade-up" data-aos-delay="400">
+                            Tes minatmu
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 <section id="tutorial"
     class="pt-16 pb-20 lg:pt-24 lg:pb-28 bg-backgroundPrimary h-[600px] max-w-screen overflow-hidden">
     <div class="container">
@@ -93,73 +120,61 @@
 
         <!-- Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <!-- Card 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-purpleMain" data-aos="fade-right">
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-purpleMain transition-all duration-300 
+            hover:bg-gradient-to-b hover:from-white hover:to-[#FDE3D7] hover:text-black group" data-aos="fade-right">
                 <div class="mb-4">
-                    <svg class="w-8 h-8 text-purpleMain" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 14v4a2 2 0 01-2 2H7a2 2 0 01-2-2v-4m14-2H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2z" />
-                    </svg>
+                    <img src="{{ asset('assets/logo1.svg') }}" alt="Daftar Account" class="w-8 h-8 text-[#FA7436]">
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-purpleMain">Daftar Account</h3>
+                <h3 class="text-xl font-semibold mb-2 text-black">Daftar Account</h3>
                 <p class="text-gray-600 mb-4">
                     Daftar akunmu untuk mendapatkan hasil jurusanmu
                 </p>
             </div>
 
+
+
+
+
             <!-- Card 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-purpleMain" data-aos="fade-up">
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-[#338DFF] transition-all duration-500 
+        hover:bg-gradient-to-b hover:from-white hover:via-[#F0F8FF] hover:via-80% hover:to-[#E6F2FF] hover:text-black group"
+                data-aos="fade-up">
                 <div class="mb-4">
-                    <svg class="w-8 h-8 text-purpleMain" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <img src="{{ asset('assets/logo2.svg') }}" alt="Pembayaran" class="w-12 h-12 text-[#338DFF]">
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-purpleMain">Pembayaran</h3>
+                <h3 class="text-xl font-semibold mb-2 text-[#338DFF]">Pembayaran</h3>
                 <p class="text-gray-600 mb-4">
                     Pembayaran dengan mudah agar kamu bisa melakukan tes minatmu
                 </p>
             </div>
 
+
             <!-- Card 3 -->
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-purpleMain" data-aos="fade-left">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-[#F4B400] transition-all duration-500 
+        hover:bg-gradient-to-b hover:from-white hover:via-[#FEF4E6] hover:via-80% hover:to-[#FDE7C5] hover:text-black group"
+                data-aos="fade-left">
                 <div class="mb-4">
-                    <svg class="w-8 h-8 text-purpleMain" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
+                    <img src="{{ asset('assets/logo3.svg') }}" alt="Lihat Hasil" class="w-12 h-12 text-[#F4B400]">
                 </div>
-                <h3 class="text-xl font-semibold mb-2 text-purpleMain">Lihat Hasil</h3>
+                <h3 class="text-xl font-semibold mb-2 text-[#F4B400]">Lihat Hasil</h3>
                 <p class="text-gray-600 mb-4">
                     Setelah itu kamu bisa menyaksikan hasil dari tes minatmu
                 </p>
             </div>
+
+
         </div>
     </div>
 </section>
 
-<!-- Tambahkan script AOS sebelum </body> -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-            duration: 1000, // Durasi animasi dalam milidetik
-            easing: 'ease-in-out', // Efek transisi animasi
-            once: false, // Biarkan animasi berjalan setiap kali masuk viewport
-            mirror: true // Animasi tetap berjalan saat scroll ke atas
-        });
-</script>
-
-
-<section id="tentang" class="pt-16 pb-20 lg:pt-24 lg:pb-28 bg-backgroundLight h-[600px] max-w-screen overflow-hidden">
-    <div class="container grid lg:grid-cols-12 gap-8">
+<section id="tentang" class="pt-16 pb-20 lg:pt-20 lg:pb-28 bg-backgroundLight h-[600px] max-w-screen overflow-hidden">
+    <div class="container grid lg:grid-cols-10 gap-8">
         <!-- Kolom Kiri: Teks -->
-        <div class="lg:col-span-7">
+        <div class="lg:col-span-4 pl-10">
             <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-                Apa itu <span class="italic">Jurusanku</span>?
+                Apa itu <span>Jurusanku</span>?
             </h1>
             <p class="text-gray-600 md:text-lg my-6">
                 Sebuah website yang dirancang untuk membantu kamu menemukan jurusan yang paling sesuai dengan minat dan
@@ -173,14 +188,15 @@
         </div>
 
         <!-- Kolom Kanan: Maskot & Floating Cards -->
-        <div class="lg:col-span-5 flex justify-center items-center relative">
+        <div class="lg:col-span-5 flex justify-center items-center relative ">
             <!-- Maskot -->
-            <img src="{{ asset(path: 'assets/jurpan-home.png') }}" alt="Jurusanku Owl Mascot"
-                class="w-[320px] md:w-[400px] lg:w-[450px] z-10 relative">
+            <img src="{{ asset(path: 'assets/jurpan-home.svg') }}" alt="Jurusanku Owl Mascot"
+                class="w-[270px] md:w-[320px] lg:w-[300px] z-10 relative">
+
 
             <!-- Floating Cards -->
             <!-- Card 1: Penilaian Terbaik -->
-            <div class="floating-card absolute top-8 left-0 bg-white p-3 rounded-lg shadow-lg w-[140px] z-20">
+            <div class="floating-card absolute top-[80%] left-12 bg-white p-3 rounded-lg shadow-lg w-[140px] z-20">
                 <h4 class="text-xs font-semibold mb-1">Penilaian Terbaik</h4>
                 <div class="flex gap-1 text-sm">
                     <!-- Mengecilkan emoji -->
@@ -193,18 +209,18 @@
             </div>
 
             <!-- Card 2: Masukan Positif -->
+            <!-- Masukan Positif -->
             <div
-                class="floating-card absolute top-0 right-0 translate-x-2 -translate-y-2 bg-white p-4 rounded-lg shadow-lg w-[200px] whitespace-normal z-20">
+                class="floating-card absolute top-[100%] right-[-20px] transform -translate-y-1/3 translate-x-14 bg-white p-4 rounded-lg shadow-lg w-[250px] whitespace-normal z-20">
                 <h3 class="text-lg font-bold text-purpleMain mb-1">95%</h3> <!-- Font lebih kecil -->
                 <p class="text-gray-600 text-sm font-semibold">Masukan Positif</p>
                 <p class="text-xs text-gray-500">Pemberian masukan positif membawa dampak baik untuk perkembangan
                     website ini.</p>
             </div>
 
-
-            <!-- Card 3: Total Pengguna -->
+            <!-- Total Pengguna (Digeser lebih ke kanan) -->
             <div
-                class="floating-card absolute top-[80%] right-1/4 transform -translate-y-1/3 translate-x-12 bg-white p-4 rounded-lg shadow-lg w-[250px] whitespace-normal z-20">
+                class="floating-card absolute top-0 right-[-80px] translate-x-4 -translate-y-2 bg-white p-4 rounded-lg shadow-lg w-auto max-w-[260px] z-20">
                 <h3 class="text-lg font-bold text-purpleMain mb-1">30,000+</h3> <!-- Font lebih kecil -->
                 <p class="text-gray-600 text-sm font-semibold">Total Pengguna</p>
                 <p class="text-xs text-gray-500">Total penggunaan Jurusanku sebagai penentu masa depan mereka.</p>
@@ -212,58 +228,83 @@
 
 
         </div>
-
+    </div>
 
 </section>
 
 
+
 <section id="prospek" class="pt-16 pb-20 lg:pt-24 lg:pb-28 bg-backgroundPrimary h-[600px] max-w-screen overflow-hidden">
-    <img src="{{ asset(path: 'assets/background.png') }}" alt="Background Prospek"
-        class="absolute  w-full h-full max-h-[500px] object-cover z-[1]">
+    <script>
+        document.querySelectorAll(".hover-card").forEach(card => {
+            card.addEventListener("mouseenter", () => {
+                card.classList.add("scale-105", "shadow-lg");
+            });
+    
+            card.addEventListener("mouseleave", () => {
+                card.classList.remove("scale-105", "shadow-lg");
+            });
+        });
+    </script>
 
     <div class="container mx-auto px-4">
         {{-- Header Section --}}
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">Top peluang <span class="text-indigo-600">jurusan</span></h2>
+            <h2 class="text-4xl font-bold mb-4">Top peluang <span class="text-purpleMain">jurusan</span></h2>
             <p class="text-gray-600">
                 Jurusan yang banyak diminati dengan prospek kuliah dan kerja terbaik
             </p>
         </div>
 
+        
         {{-- Cards Container --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {{-- Card 1 - Sistem IT --}}
-            <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('assets/prospek1.png') }}"
-                    alt="Sistem IT">
-                <div class="p-4 flex justify-between items-center">
-                    <h3 class="text-xl font-semibold">Sistem IT</h3>
-                    <span class="text-orange-500 font-medium">01</span>
-                </div>
-            </a>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-6xl mx-auto px-4">
+    {{-- Card 1 - Sistem IT --}}
+    <div class="flex justify-center">
+        <a href="#"
+            class="bg-white w-[290px] h-[350px] rounded-lg shadow-sm hover:shadow-lg transition-transform transform hover:scale-105 duration-300">
+            <img class="w-full h-50 object-cover rounded-t-lg" src="{{ asset('assets/prospek1.png') }}"
+                alt="Sistem IT">
+            <div class="p-4 flex justify-between items-center">
+                <h3 class="text-xl font-semibold">Sistem IT</h3>
+                <span class="text-purpleMain font-bold">01</span>
+            </div>
+        </a>
+    </div>
 
-            {{-- Card 2 - Bisnis --}}
-            <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('assets/prospek2.png') }}"
-                    alt="Bisnis">
-                <div class="p-4 flex justify-between items-center">
-                    <h3 class="text-xl font-semibold">Bisnis</h3>
-                    <span class="text-orange-500 font-medium">02</span>
-                </div>
-            </a>
+    {{-- Card 2 - Bisnis --}}
+    <div class="flex justify-center">
+        <a href="#"
+            class="bg-white w-[290px] h-[350px] rounded-lg shadow-sm hover:shadow-lg transition-transform transform hover:scale-105 duration-300">
+            <img class="w-full h-50 object-cover rounded-t-lg" src="{{ asset('assets/prospek2.png') }}"
+                alt="Bisnis">
+            <div class="p-4 flex justify-between items-center">
+                <h3 class="text-xl font-semibold">Bisnis</h3>
+                <span class="text-purpleMain font-bold">02</span>
+            </div>
+        </a>
+    </div>
 
-            {{-- Card 3 - Perkantoran --}}
-            <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('assets/prospek3.png') }}"
-                    alt="Perkantoran">
-                <div class="p-4 flex justify-between items-center">
-                    <h3 class="text-xl font-semibold">Perkantoran</h3>
-                    <span class="text-orange-500 font-medium">03</span>
-                </div>
-            </a>
-        </div>
+    {{-- Card 3 - Perkantoran --}}
+    <div class="flex justify-center">
+        <a href="#"
+            class="bg-white w-[290px] h-[350px] rounded-lg shadow-sm hover:shadow-lg transition-transform transform hover:scale-105 duration-300">
+            <img class="w-full h-50 object-cover rounded-t-lg" src="{{ asset('assets/prospek3.png') }}"
+                alt="Perkantoran">
+            <div class="p-4 flex justify-between items-center">
+                <h3 class="text-xl font-semibold">Perkantoran</h3>
+                <span class="text-purpleMain font-bold">03</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+
     </div>
 </section>
+
+
+
 {{-- Section 1: Hal yang didapatkan --}}
 <section id="fitur" class="pt-16 pb-20 lg:pt-24 lg:pb-28 bg-backgroundLight h-[600px] max-w-screen overflow-hidden">
     <div class="container mx-auto px-4">
@@ -283,21 +324,6 @@
                         <div class="p-2 bg-indigo-100 rounded-lg">
                             <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-indigo-600">Jurusan yang sesuai</h3>
-                            <p class="text-gray-600">Kamu akan mendapatkan hasil jurusan sesuai dengan minat bakat kamu
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- Feature 2 --}}
-                    <div class="flex items-start gap-4 p-4 bg-white rounded-lg hover:shadow-md transition">
-                        <div class="p-2 bg-indigo-100 rounded-lg">
-                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </div>
@@ -308,7 +334,10 @@
                         </div>
                     </div>
 
-                    {{-- Feature 3 --}}
+                   
+
+                    {{-- Feature 2 --}}
+                
                     <div class="flex items-start gap-4 p-4 bg-white rounded-lg hover:shadow-md transition">
                         <div class="p-2 bg-indigo-100 rounded-lg">
                             <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -321,35 +350,55 @@
                             <p class="text-gray-600">Chat Bot AI untuk menemukan jawaban yang cepat</p>
                         </div>
                     </div>
+                    {{-- Feature 3 --}}
+                    <div class="flex items-start gap-4 p-4 bg-white rounded-lg hover:shadow-md transition">
+                        <div class="p-2 bg-indigo-100 rounded-lg">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-indigo-600">Jurusan yang sesuai</h3>
+                            <p class="text-gray-600">Kamu akan mendapatkan hasil jurusan sesuai dengan minat bakat kamu
+                            </p>
+                        </div>
+                    </div>
+                   
                 </div>
             </div>
-            <div class="relative">
-                <img src="{{ asset('assets/fitur.png') }}" alt="Video Preview" class="w-full h-auto">
+            <div class="relative w-4/5 mx-auto"> 
+                <img src="{{ asset('assets/fitur.png') }}" alt="Video Preview" class="w-full h-auto max-w-3xl">
             </div>
-            >
+            
+            
         </div>
     </div>
 </section>
 
 <section id="testimoni" class="pt-20 pb-24 lg:pt-28 lg:pb-32 bg-backgroundLight h-auto max-w-screen overflow-hidden">
     <div class="container mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-14 items-center"> <!-- Kurangi gap agar lebih rapat -->
-            
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+            <!-- Kurangi gap agar lebih rapat -->
+
             <!-- Bagian Kiri -->
-            <div class="ml-10 lg:ml-20"> <!-- Geser lebih ke kanan -->
+            <div class="ml-10 lg:ml-20">
+                <!-- Geser lebih ke kanan -->
                 <h2 class="text-4xl font-bold mb-3">Testimoni</h2> <!-- Perkecil ukuran teks -->
                 <h3 class="text-4xl font-bold text-indigo-600 mb-6">jurusanku.</h3> <!-- Perkecil ukuran teks -->
                 <p class="text-lg text-gray-700 mb-8 leading-relaxed">
                     <!-- Perkecil paragraf -->
                     Sebuah ucapan kepuasan oleh customer yang pernah melakukan tes minat di nextEdu.
                 </p>
-                <div class="flex gap-6"> <!-- Sesuaikan jarak tombol -->
+                <div class="flex gap-6">
+                    <!-- Sesuaikan jarak tombol -->
                     <button id="prevBtn" class="p-3 rounded-full border border-gray-400 hover:bg-gray-200 transition">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
-                    <button id="nextBtn" class="p-3 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                    <button id="nextBtn"
+                        class="p-3 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
@@ -500,5 +549,15 @@
         }
 </script>
 </section>
- {{-- Section 3: Subscribe --}}
+{{-- Section 3: Subscribe --}}
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+           duration: 1000, // Durasi animasi dalam milidetik
+           easing: 'ease-in-out', // Efek transisi animasi
+           once: false, // Biarkan animasi berjalan setiap kali masuk viewport
+           mirror: true // Animasi tetap berjalan saat scroll ke atas
+       });
+</script>
 @endsection

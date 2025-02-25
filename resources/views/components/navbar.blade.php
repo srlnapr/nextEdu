@@ -22,7 +22,7 @@
                         <a href="/" class="text-dark mx-8 flex py-2 text-base group-hover:text-purpleMain">Beranda</a>
                     </li>
                     <li class="group">
-                        <a href="/diagnose" class="text-dark mx-8 flex py-2 text-base group-hover:text-purpleMain">Tes
+                        <a href="/tesminatmu" class="text-dark mx-8 flex py-2 text-base group-hover:text-purpleMain">Tes
                             Minatmu</a>
                     </li>
                     <li class="group">
@@ -30,7 +30,7 @@
                             class="text-dark mx-8 flex py-2 text-base group-hover:text-purpleMain">Edubot</a>
                     </li>
                     <li class="group">
-                        <a href="/medicinesPage"
+                        <a href="/artikelsPage"
                             class="text-dark mx-8 flex py-2 text-base group-hover:text-purpleMain">Artikel</a>
                     </li>
 

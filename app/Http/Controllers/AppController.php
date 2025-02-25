@@ -23,43 +23,43 @@ class AppController extends Controller
     {
         $users = User::all();
         $jurusanList = Jurusan::all();
-        $artikels = Artikel::all();
+        $artikelList = Artikel::all();
         $hasilTes = HasilTes::all();
     
         return view('pages.home', [
             'users' => $users,
             'jurusanList' => $jurusanList,
-            'artikels' => $artikels,
+            'artikelList' => $artikelList,
             'hasilTes' => $hasilTes
         ]);
     }
     
     public function hasilTes()
-{
-    $jurusanList = Jurusan::all();
-    $pertanyaanList = Pertanyaan::all();
-    $saranPekerjaan = SaranPekerjaan::all(); // Ganti dari "solutions"
-    $artikels = Artikel::all(); // Ganti dari "medicines"
-
-    return view('pages.hasilTes', [
-        "pertanyaanList" => $pertanyaanList,
-        "jurusanList" => $jurusanList,
-        "saranPekerjaan" => $saranPekerjaan,
-        "artikels" => $artikels,
-    ]);
-}
-
+    {
+        $jurusanList = Jurusan::all();
+        $pertanyaanList = Pertanyaan::all();
+        $saranPekerjaan = SaranPekerjaan::all(); // Ganti dari "solutions"
+        $artikelList = Artikel::all(); // Ganti dari "medicines"
+    
+        return view('pages.hasilTes', [
+            "pertanyaanList" => $pertanyaanList,
+            "jurusanList" => $jurusanList,
+            "saranPekerjaan" => $saranPekerjaan,
+            "artikelList" => $artikelList,
+        ]);
+    }
+    
     public function artikel()
     {
-        $artikels = Artikel::orderBy('jurusan_id');
+        $artikelList = Artikel::orderBy('jurusan_id');
         $jurusanList = Jurusan::all();
     
         if (request('search')) {
-            $artikels->where('name', 'like', '%' . request('search') . '%');
+            $artikelList->where('name', 'like', '%' . request('search') . '%');
         }
     
-        return view('pages.medicinesPage', [
-            'artikels' => $artikels->paginate(8)->withQueryString(),
+        return view('pages.artikelPage', [
+            'artikelList' => $artikelList->paginate(8)->withQueryString(),
             'jurusanList' => $jurusanList
         ]);
     }
@@ -68,6 +68,7 @@ class AppController extends Controller
     {
         return view('pages.about');
     }
+    
     
     public function logicRelation()
     {

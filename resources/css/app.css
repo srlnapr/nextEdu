@@ -118,8 +118,19 @@ body::-webkit-scrollbar-button {
     transform: translateY(-15px);
 }
 
+.floating-card h3 {
+    font-size: 1.2rem; /* Contoh: Ubah ukuran font menjadi 1.2rem */
+  }
+  
+  .floating-card p {
+    font-size: 0.9rem; /* Contoh: Ubah ukuran font menjadi 0.9rem */
+  }
+  
+
 .floating-card {
     animation: floatAnimation 3s ease-in-out infinite;
+    padding: 1rem; /* Contoh: Kurangi padding menjadi 1rem */
+
 }
 
 @keyframes floatAnimation {

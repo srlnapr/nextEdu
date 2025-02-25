@@ -22,9 +22,9 @@ class UserController extends Controller
         $hasilTes = HasilTes::all();
         $users = User::orderBy('id');
         $usersInfo = User::all();
-        $pertanyaansInfo = Pertanyaan::all();
-        $jurusansInfo = Jurusan::all();
-        $artikelsInfo = Artikel::all();
+        $pertanyaanInfo = Pertanyaan::all();
+        $jurusanInfo = Jurusan::all();
+        $artikelInfo = Artikel::all();
 
         if (request('search')){
             $users->where('name', 'like', '%' . request('search') . '%');
@@ -33,9 +33,9 @@ class UserController extends Controller
         return view('components.admin.users.view', [
             'hasilTes' => $hasilTes,
             'users' => $users->paginate(15)->withQueryString(),
-            'pertanyaansInfo' => $pertanyaansInfo,
-            'jurusansInfo' => $jurusansInfo,
-            'artikelsInfo' => $artikelsInfo,
+            'pertanyaanInfo' => $pertanyaanInfo,
+            'jurusanInfo' => $jurusanInfo,
+            'artikelInfo' => $artikelInfo,
             'usersInfo' => $usersInfo
         ]);
     }

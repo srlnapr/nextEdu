@@ -23,17 +23,17 @@
           
           <form id="quiz-form" class="mt-5 text-center">
             @foreach($pertanyaanList as $index => $pertanyaan)
-            <div class="mt-8" data-id="{{ $pertanyaan['id'] }}">
-                <!-- Bungkus teks pertanyaan dengan inline-block agar sejajar kiri -->
-                <p class="text-black font-medium text-left mx-auto pl-20" style="max-width: 600px;">{{ $index + 1 }}. {{ $pertanyaan['pertanyaan'] }}</p>
-            
-                <!-- Tombol dibuat sejajar dan ukuran sama -->
+            <div class="question-block mt-8" data-id="{{ $pertanyaan['id'] }}">
+                <p class="text-black font-medium text-left mx-auto pl-20" style="max-width: 600px;">
+                    {{ $index + 1 }}. {{ $pertanyaan['pertanyaan'] }}
+                </p>
                 <div class="flex justify-center gap-4 mt-4">
                     <button type="button" class="answer-btn w-24 px-6 py-2 rounded-md border border-purpleMain font-medium" data-value="0">Tidak</button>
                     <button type="button" class="answer-btn w-24 px-6 py-2 rounded-md border border-purpleMain font-medium" data-value="1">Ya</button>
                 </div>
             </div>
             @endforeach
+            
             
             <!-- Tombol Selanjutnya -->
             <div class="flex justify-center mt-8">

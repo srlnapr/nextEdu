@@ -24,7 +24,7 @@
             </div>
           </form>
         </div>
-        @if ($artikels->count())
+        @if ($artikelList->count())
           <table class="mb-3 w-full rounded-xl border text-slate-800">
             <thead class="text-slate-700">
               <tr>
@@ -49,7 +49,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($artikels as $artikel)
+              @foreach ($artikelList as $artikel)
                 <tr class="px-6 py-3 text-center">
                   <td class="border px-6 py-2">{{ $loop->iteration }}</td>
                   <td class="border px-6 py-2">{{ $artikel['name'] }}</td>
@@ -85,7 +85,7 @@
             <h1 class="mt-2 mb-4 border p-3 text-center text-lg font-light text-primary lg:text-2xl">Tidak ada Artikels.</h1>
         @endif
         </table>
-        {{ $artikels->links() }}
+        {{ $artikelList->links() }}
       </div>
     </div>
   </div>

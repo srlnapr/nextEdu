@@ -20,19 +20,19 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $artikels = Artikel::orderby('jurusan_id');
-        $artikelsInfo = Artikel::all();
+        $artikelList = Artikel::orderby('jurusan_id');
+        $artikelListInfo = Artikel::all();
         $jurusansInfo = Jurusan::all();
         $pertanyaansInfo = Pertanyaan::all();
         $usersInfo = User::all();
 
         if (request('search')){
-            $artikels->where('name', 'like', '%' . request('search') . '%');
+            $artikelList->where('name', 'like', '%' . request('search') . '%');
         }
 
         return view('components.admin.artikels.view', [
-            'artikels' => $artikels->paginate(10)->withQueryString(),
-            'artikelsInfo' => $artikelsInfo,
+            'artikelList' => $artikelList->paginate(10)->withQueryString(),
+            'artikelListInfo' => $artikelListInfo,
             'jurusansInfo' => $jurusansInfo,
             'pertanyaansInfo' => $pertanyaansInfo,
             'usersInfo' => $usersInfo
@@ -44,13 +44,13 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        $artikelsInfo = Artikel::all();
+        $artikelListInfo = Artikel::all();
         $jurusansInfo = Jurusan::all();
         $pertanyaansInfo = Pertanyaan::all();
         $usersInfo = User::all();
 
         return view('components.admin.artikels.add', [
-            'artikelsInfo' => $artikelsInfo,
+            'artikelListInfo' => $artikelListInfo,
             'jurusansInfo' => $jurusansInfo,
             'pertanyaansInfo' => $pertanyaansInfo,
             'usersInfo' => $usersInfo
@@ -93,14 +93,14 @@ class ArtikelController extends Controller
      */
     public function edit(Artikel $artikel)
     {
-        $artikelsInfo = Artikel::all();
+        $artikelListInfo = Artikel::all();
         $jurusansInfo = Jurusan::all();
         $pertanyaansInfo = Pertanyaan::all();
         $usersInfo = User::all();
 
         return view('components.admin.artikels.edit', [
             'artikel' => $artikel,
-            'artikelsInfo' => $artikelsInfo,
+            'artikelListInfo' => $artikelListInfo,
             'jurusansInfo' => $jurusansInfo,
             'pertanyaansInfo' => $pertanyaansInfo,
             'usersInfo' => $usersInfo

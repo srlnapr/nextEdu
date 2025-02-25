@@ -1,60 +1,97 @@
-@extends('layouts.app')
+ <!DOCTYPE html>
+ <html>
+ <head>
+  <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  @vite('resources/css/app.css')
 
-@section('content')
-  <section class="pt-28 pb-24 lg:pt-36 lg:pb-32">
-    <div class="container">
-      <div class="w-full px-4">
-        <div class="mx-auto mb-6 max-w-xl text-center">
-          <h2 class="text-3xl font-bold text-primary lg:text-3xl">Register</h2>
+   <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+ </head>
+ <body>
+  <div class="container mx-auto">
+    <div class="flex flex-col lg:flex-row bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto">
+      
+      <!-- Form Login -->
+      <div class="w-full lg:w-1/2 p-8">
+        <div class="text-center mb-6">
+          <img src="{{ asset('assets/logo-typo.png') }}" alt="nextEdu" class="h-12 mx-auto">
+          <h2 class="text-xl font-semibold text-primary mt-2">Masuk ke akun Anda</h2>
         </div>
-      </div>
-      <div class="mx-auto w-4/5 md:w-2/5">
-        <form action="/register" method="post">
+        
+        <form action="/login" method="post">
           @csrf
-          <div class="mb-5 w-full px-4">
-            <label for="name" class="text-base font-bold text-primary">
-              Name
-            </label>
-            <input type="text" id="name" name="name"
-              class="bayangan_field @error('name') border-red-500 @else border-[#030723] @enderror w-full rounded-sm border-2 bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500"
-              value="{{ @old('name') }}" />
-            @error('name')
-              <p class="mt-2 text-red-500">{{ $message }}</p>
-            @enderror
-          </div>
-          <div class="mb-5 w-full px-4">
-            <label for="email" class="text-base font-bold text-primary">
-              Email
-            </label>
-            <input type="text" id="email" name="email"
-              class="bayangan_field @error('email') border-red-500 @else border-[#030723] @enderror w-full rounded-sm border-2 bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500"
-              value="{{ @old('email') }}" />
+          
+          <!-- Email -->
+          <div class="mb-4">
+            <label class="block text-sm font-semibold text-gray-700" for="email">Email</label>
+            <div class="flex items-center border rounded-lg bg-gray-100 px-3">
+              <input type="email" id="email" name="email" placeholder="email@example.com"
+                class="w-full bg-transparent border-none p-3 focus:outline-none"
+                value="{{ old('email') }}">
+              <span class="text-gray-500">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
             @error('email')
-              <p class="mt-2 text-red-500">{{ $message }}</p>
+              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
           </div>
-          <div class="mb-8 w-full px-4">
-            <label for="password" class="text-base font-bold text-primary">
-              Password
-            </label>
-            <input type="password" id="password" name="password"
-              class="bayangan_field @error('password') border-red-500 @else border-[#030723] @enderror w-full rounded-sm border-2 bg-white p-3 focus:outline-none focus:ring focus:ring-blue-500"
-              value="{{ @old('password') }}" />
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label class="block text-sm font-semibold text-gray-700" for="password">Password</label>
+            <div class="flex items-center border rounded-lg bg-gray-100 px-3">
+              <input type="password" id="password" name="password" placeholder="Enter your password"
+                class="w-full bg-transparent border-none p-3 focus:outline-none">
+              <span class="text-gray-500">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
             @error('password')
-              <p class="mt-2 text-red-500">{{ $message }}</p>
+              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
           </div>
-          <div class="w-full px-4">
-            <button type="submit"
-              class="btnn w-full rounded-sm border-2 border-black bg-black py-3 px-8 text-white duration-300 ease-out hover:bg-white hover:text-black focus:outline-none focus:ring focus:ring-blue-500">
-              Register
-            </button>
+
+          <!-- Lupa Password -->
+          <div class="text-right mb-4">
+            <a href="#" class="text-sm text-primary hover:underline">Lupa password?</a>
+          </div>
+
+          <!-- Tombol Login -->
+          <button type="submit"
+            class="w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold hover:bg-purple-700 transition duration-300">
+            Login
+          </button>
+
+          <!-- Signup -->
+          <div class="text-center my-4 text-gray-500">Atau</div>
+          <a href="/register"
+            class="w-full border border-primary text-primary py-3 rounded-lg text-lg font-semibold text-center block hover:bg-primary hover:text-white transition duration-300">
+            Signup
+          </a>
+
+          <!-- Login via Sosial Media -->
+          <div class="text-center mt-4">
+            <p class="text-sm text-gray-600">Atau, login melalui</p>
+            <div class="flex justify-center space-x-4 mt-2">
+              <a href="#" class="text-blue-600 hover:underline">Facebook</a>
+              <a href="#" class="text-blue-500 hover:underline">LinkedIn</a>
+              <a href="#" class="text-red-500 hover:underline">Google</a>
+            </div>
           </div>
         </form>
-        <div class="mt-4 w-full px-4">
-          <p>Already have an Account? <span class="text-secondary"><a href="/login">Login</a></span> </p>
-        </div>
       </div>
+
+      <!-- Ilustrasi -->
+      <div class="hidden lg:flex w-1/2 bg-gray-50 p-8 items-center justify-center">
+        <img src="{{ asset('assets/loginimg.svg') }}" alt="Ilustrasi" class="max-w-sm">
+      </div>
+
     </div>
-  </section>
-@endsection
+  </div>
+ </body>
+ </html>
+      
+   

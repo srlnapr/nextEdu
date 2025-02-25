@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   @vite('resources/css/app.css')
 
-  <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('android-chrome-512x512.png') }}">
+  <link rel="icon" href="{{ asset(path: 'assets/logo.png') }}" type="image/png"  sizes="256x256">    <!-- Fonts -->
   <title>nextEdu</title>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <!-- Fonts -->
