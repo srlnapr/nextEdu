@@ -153,3 +153,12 @@ html, body {
     animation: floating 3s ease-in-out infinite;
     will-change: transform;
 }
+#chat-box div {
+    margin-bottom: 12px; /* Tambahkan jarak antar chat */
+}
+
+@media (min-width: 768px) {
+    #chat-box div {
+        margin-bottom: 16px; /* Jarak lebih besar di layar lebih lebar */
+    }
+}
