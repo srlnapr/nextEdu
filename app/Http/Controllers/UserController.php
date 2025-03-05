@@ -11,31 +11,37 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct(){
-        $this->middleware('admin');
+    public function __construct()
+    {
+        // Hanya admin yang bisa mengakses UserController
+        $this->middleware(['auth', 'admin']);
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $hasilTes = HasilTes::all();
-        $users = User::orderBy('id');
-        $usersInfo = User::all();
-        $pertanyaanInfo = Pertanyaan::all();
-        $jurusanInfo = Jurusan::all();
-        $artikelInfo = Artikel::all();
+        $usersQuery = User::orderBy('id'); // Query Builder
+        $pertanyaansInfo = Pertanyaan::all();
+        $jurusansInfo = Jurusan::all();
+        $artikelsInfo = Artikel::all();
 
-        if (request('search')){
-            $users->where('name', 'like', '%' . request('search') . '%');
+        // Pencarian berdasarkan nama
+        if (request('search')) {
+            $usersQuery->where('name', 'like', '%' . request('search') . '%');
         }
+
+        $users = $usersQuery->paginate(15)->withQueryString(); // Pagination
+        $usersInfo = User::all(); // Data tambahan jika diperlukan
 
         return view('components.admin.users.view', [
             'hasilTes' => $hasilTes,
-            'users' => $users->paginate(15)->withQueryString(),
-            'pertanyaanInfo' => $pertanyaanInfo,
-            'jurusanInfo' => $jurusanInfo,
-            'artikelInfo' => $artikelInfo,
+            'users' => $users,
+            'pertanyaansInfo' => $pertanyaansInfo,
+            'jurusansInfo' => $jurusansInfo,
+            'artikelsInfo' => $artikelsInfo,
             'usersInfo' => $usersInfo
         ]);
     }
@@ -45,7 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.admin.users.create');
     }
 
     /**
@@ -53,7 +59,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
     }
 
     /**
@@ -61,7 +79,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('components.admin.users.show', compact('user'));
     }
 
     /**
@@ -69,7 +88,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('components.admin.users.edit', compact('user'));
     }
 
     /**
@@ -77,7 +97,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email,{$id}",
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
 
     /**
@@ -85,6 +117,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
     }
 }

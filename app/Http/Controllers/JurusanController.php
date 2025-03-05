@@ -135,4 +135,9 @@ class JurusanController extends Controller
         $jurusan->delete();
         return redirect('/jurusans')->with('success', 'Jurusan berhasil dihapus');
     }
+    public function getJurusanList()
+    {
+        return response()->json(Jurusan::select('id', 'jurusan')->get());
+    }
+    
 }    

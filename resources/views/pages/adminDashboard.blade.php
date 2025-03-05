@@ -27,10 +27,16 @@
 
             <nav class="mt-6 w-full">
                 <a href="/adminDashboard" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Dashboard</a>
+                <a href="/jurusans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Jurusan</a>
                 <a href="/pertanyaans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Pertanyaan</a>
                 <a href="/artikels" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Artikel</a>
                 <a href="/rules" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Rules</a>
                 <a href="/users" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings User</a>
+                <a href="/testimoni" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Testimoni</a>
+                <a href="/sekolah" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Sekolah</a>
+                <a href="/payment" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Payment</a>
+                <a href="/logout" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Logout</a>
+
             </nav>
         </aside>
 
@@ -49,7 +55,7 @@
                         <p class="text-lg text-gray-600">Jumlah Pertanyaan</p>
                     </div>
                     <div class="bg-white p-6 rounded-md shadow-md text-center">
-                        <h2 class="text-4xl font-bold text-purple-700">{{ count($jurusansInfo ?? []) - 1 }}</h2>
+                        <h2 class="text-4xl font-bold text-purple-700">{{ count($jurusansInfo ?? [])}}</h2>
                         <p class="text-lg text-gray-600">Total List Jurusan</p>
                     </div>
                     <div class="bg-white p-6 rounded-md shadow-md text-center">

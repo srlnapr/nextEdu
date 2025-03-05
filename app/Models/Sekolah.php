@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jurusan extends Model
+class Sekolah extends Model
 {
     use HasFactory;
-    
-    protected $table = 'jurusan'; // Sesuaikan dengan nama tabel di database
     protected $guarded = ['id'];
 
-
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'nama_jurusan_id');
+    }
 }
-
-
