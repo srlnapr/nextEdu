@@ -38,18 +38,22 @@ class AuthController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:10'
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:5|max:10'
+    ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-        User::create($validatedData);
+    $validatedData['password'] = bcrypt($validatedData['password']);
+    $user = User::create($validatedData);
 
-        return redirect('/login')->with('success', 'Account registered successfully');
-    }
+    return response()->json([
+        'message' => 'Account registered successfully',
+        'user' => $user
+    ], 201);
+}
+
 
     public function logout(Request $request)
     {
