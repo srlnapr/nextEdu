@@ -7,13 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('sekolahs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->foreignId('nama_jurusan_id')->constrained('jurusans')->onDelete('cascade');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('sekolahs')) { // Cek apakah tabel sudah ada
+            Schema::create('sekolahs', function (Blueprint $table) {
+                $table->id();
+                $table->string('nama');
+                $table->unsignedBigInteger('nama_jurusan_id');
+                $table->timestamps();
+            });
+        }
     }
+    
 
     public function down()
     {

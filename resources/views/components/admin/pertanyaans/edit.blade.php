@@ -13,7 +13,7 @@
             <a href="/pertanyaans">Back</a>
           </button>
         </div>
-        <form class="mt-5" method="post" action="/pertanyaans/{{ $symptom['id'] }}">
+        <form class="mt-5" method="post" action="/pertanyaans/{{ $pertanyaan['id'] }}">
           @method('put')
           @csrf
           <div class="w-full lg:mx-auto">

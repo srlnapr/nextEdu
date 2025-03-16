@@ -29,6 +29,7 @@
                 <a href="/adminDashboard" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Dashboard</a>
                 <a href="/jurusans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Jurusan</a>
                 <a href="/pertanyaans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Pertanyaan</a>
+                <a href="/saranpekerjaans" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Saran Pekerjaan</a>
                 <a href="/artikels" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Artikel</a>
                 <a href="/rules" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings Rules</a>
                 <a href="/users" class="block px-4 py-3 rounded-md text-lg font-medium hover:bg-purple-600">Settings User</a>

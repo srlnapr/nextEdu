@@ -53,6 +53,7 @@ Route::resources([
     'artikels' => ArtikelController::class,
     'users' => UserController::class,
     'testimoni' => TestimoniController::class,
+    'sekolah' => SekolahController::class
     
 ]);
 
@@ -73,3 +74,5 @@ Route::get('/sekolah-hasil-tes', [SekolahController::class, 'showByHasilTes'])
 
 // 📌 Pastikan route `/sekolah` tetap tersedia jika di luar admin
 Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah');
+
+Route::get('/saranpekerjaanList', [SaranPekerjaanController::class, 'index']);
